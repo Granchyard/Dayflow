@@ -96,6 +96,52 @@ img {
   vertical-align: top;
 }
 
+body {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(31, 41, 55, 0.9)), url("/img/jr-korpa-9XngoIpxcEo-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Scroll main*/
+html,
+body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 255, 0.6) transparent;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.6);
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+          box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+  -webkit-transition: background 0.2s, -webkit-box-shadow 0.2s;
+  transition: background 0.2s, -webkit-box-shadow 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.9);
+  -webkit-box-shadow: 0 0 12px rgb(0, 255, 255);
+          box-shadow: 0 0 12px rgb(0, 255, 255);
+}
+
 html {
   font-size: 16px;
 }
