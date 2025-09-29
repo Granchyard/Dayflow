@@ -1,2 +1,17 @@
 @use "sass:math";
 @use "variables" as v;
+
+// px → % (width: prc(300, 1200);)  (300-block-size) (1200-parent-size) (300/1200 * 100%)
+@function prc($pxOne, $pxTwo) {
+  @return math.div($pxOne, $pxTwo) * 100%;
+}
+
+// px → rem (width: rem(1200);)
+@function rem($px) {
+  @return math.div($px, v.$baseFontSize) * 1rem;
+}
+
+// px → em (width: em(1200);)
+@function em($px) {
+  @return math.div($px, v.$baseFontSize) * 1em;
+}
