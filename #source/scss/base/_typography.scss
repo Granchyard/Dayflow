@@ -1,1 +1,9 @@
 @use "../abstracts" as a;
+
+html {
+  font-size: #{a.$baseFontSize}px;
+}
+body {
+  font-family: a.$font-family;
+  color: #fff;
+}
