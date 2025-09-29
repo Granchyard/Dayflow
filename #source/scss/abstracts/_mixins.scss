@@ -1,3 +1,39 @@
 @use "sass:math";
 @use "variables" as v;
 @use "functions" as f;
+
+// @include clamp-font(min, max);
+@mixin clamp-font($minPx, $maxPx, $minViewport: 320, $maxViewport: 1440) {
+  $minRem: math.div($minPx, v.$baseFontSize);
+  $maxRem: math.div($maxPx, v.$baseFontSize);
+  $slope: math.div(($maxPx - $minPx), ($maxViewport - $minViewport)) * 100;
+  $interceptPx: $minPx - (math.div($slope, 100) * $minViewport);
+  $interceptRem: math.div($interceptPx, v.$baseFontSize);
+
+  font-size: clamp(
+    #{$minRem}rem,
+    #{$interceptRem}rem + #{$slope}vw,
+    #{$maxRem}rem
+  );
+}
+
+// @include clamp-size(property, min, max);
+@mixin clamp-size(
+  $property,
+  $minPx,
+  $maxPx,
+  $minViewport: 320,
+  $maxViewport: 1440
+) {
+  $minRem: math.div($minPx, v.$baseFontSize);
+  $maxRem: math.div($maxPx, v.$baseFontSize);
+  $slope: math.div(($maxPx - $minPx), ($maxViewport - $minViewport)) * 100;
+  $interceptPx: $minPx - (math.div($slope, 100) * $minViewport);
+  $interceptRem: math.div($interceptPx, v.$baseFontSize);
+
+  #{$property}: clamp(
+    #{$minRem}rem,
+    #{$interceptRem}rem + #{$slope}vw,
+    #{$maxRem}rem
+  );
+}
