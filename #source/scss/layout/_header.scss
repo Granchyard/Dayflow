@@ -7,5 +7,7 @@
   top: a.rem(20);
   left: 50%;
   transform: translateX(-50%);
+  @include a.glassy;
+  border-radius: a.rem(20);
   z-index: 100;
 }

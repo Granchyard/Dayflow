@@ -11,5 +11,12 @@
   overflow: auto;
   pointer-events: none; 
   visibility: hidden; 
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  @include a.glassy;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05)
+  );
   z-index: 101;
 }
