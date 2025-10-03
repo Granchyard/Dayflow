@@ -1,1 +1,11 @@
 @use "../abstracts" as a;
+
+.header {
+  width: clamp(a.rem(250), 90%, a.rem(1440));
+  min-height: a.$header-height;
+  position: fixed;
+  top: a.rem(20);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}

@@ -1,1 +1,10 @@
 @use "../abstracts" as a;
+
+.container {
+  min-height: 100svh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  width: clamp(a.rem(250), 90%, a.rem(1440));
+  @include a.clamp-size(padding-inline, 16, 40);
+  padding: a.$main-container-padding;
+}

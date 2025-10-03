@@ -1,1 +1,15 @@
 @use "../abstracts" as a;
+
+.sidebar {
+  @include a.clamp-size(width, 170, 285);
+  position: fixed;
+  top: a.rem(100);
+  bottom: a.rem(20);
+  left: calc(50% - (clamp(a.rem(250), 90%, a.rem(1440)) / 2));
+  transform: translateX(-100%);
+  opacity: 0;
+  overflow: auto;
+  pointer-events: none; 
+  visibility: hidden; 
+  z-index: 101;
+}

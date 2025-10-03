@@ -1,1 +1,17 @@
 @use "../abstracts" as a;
+
+.content {
+  min-height: calc(
+    100vh - (2 * a.$main-container-padding) - a.$header-height - a.$extra-offset
+  );
+  min-height: calc(
+    100svh - (2 * a.$main-container-padding) - a.$header-height -
+      a.$extra-offset
+  );
+  min-height: calc(
+    100dvh - (2 * a.$main-container-padding) - a.$header-height -
+      a.$extra-offset
+  );
+  display: flex;
+  margin: a.rem(80) 0 0 0;
+}
