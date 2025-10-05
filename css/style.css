@@ -208,6 +208,13 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+.header__menu-burger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 44px;
+  aspect-ratio: 1;
+}
 
 .sidebar {
   width: clamp(10.625rem, 8.5714285714rem + 10.2678571429vw, 17.8125rem);
