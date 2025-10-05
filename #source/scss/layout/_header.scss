@@ -87,4 +87,30 @@
       outline-offset: 4px;
     }
   }
+
+  &__controls {
+    display: flex;
+  }
+
+  &__list {
+    display: flex;
+    gap: a.rem(20);
+  }
+
+  &__item,
+  &__item button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item button {
+    position: relative;
+  }
+
+  &__item button::before {
+    content: "";
+    position: absolute;
+    inset: -9.5px;
+  }
 }

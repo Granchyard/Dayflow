@@ -273,6 +273,36 @@ body {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
+.header__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.header__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.25rem;
+}
+.header__item, .header__item button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.header__item button {
+  position: relative;
+}
+.header__item button::before {
+  content: "";
+  position: absolute;
+  inset: -9.5px;
+}
 
 .sidebar {
   width: clamp(10.625rem, 8.5714285714rem + 10.2678571429vw, 17.8125rem);
