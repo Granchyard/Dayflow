@@ -12,4 +12,14 @@
   contain: layout paint;
   @include a.glassy;
   z-index: 100;
+
+  &__topbar {
+    width: 100%;
+    @include a.clamp-size(padding-inline, 16, 40);
+    margin: 0 auto;
+    min-height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
