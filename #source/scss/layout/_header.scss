@@ -28,4 +28,63 @@
     width: 44px;
     aspect-ratio: 1;
   }
+
+  &__burger-button {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+
+    span,
+    &::before,
+    &::after {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: currentColor;
+      transition: transform 0.3s, opacity 0.3s, filter 0.3s;
+      content: "";
+    }
+
+    span {
+      top: calc(50% - 1px);
+      transform: none;
+    }
+
+    &::before {
+      top: 13px;
+    }
+    &::after {
+      bottom: 13px;
+    }
+
+    &._active {
+      span {
+        transform: scale(0);
+        opacity: 0;
+      }
+      &::before {
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+      }
+      &::after {
+        top: 50%;
+        transform: translateY(-50%) rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      span,
+      &::before,
+      &::after {
+        filter: drop-shadow(0 0 6px rgba(0, 234, 255, 0.5));
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+  }
 }
