@@ -8,6 +8,8 @@
   top: a.rem(20);
   left: 50%;
   transform: translateX(-50%);
+  isolation: isolate;
+  contain: layout paint;
   @include a.glassy;
   z-index: 100;
 }

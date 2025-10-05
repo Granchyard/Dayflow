@@ -183,6 +183,8 @@ body {
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
+  isolation: isolate;
+  contain: layout paint;
   background: #10223f;
   border: 1px solid rgba(255, 255, 255, 0.2);
   -webkit-box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
