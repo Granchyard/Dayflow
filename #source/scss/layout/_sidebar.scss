@@ -1,6 +1,11 @@
 @use "../abstracts" as a;
 
 .sidebar {
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 0.25s;
+  --t-med: 0.35s;
+  --t-vis: var(--t-med);
+
   @include a.clamp-size(width, 170, 285);
   position: fixed;
   top: a.rem(100);
@@ -9,8 +14,8 @@
   transform: translateX(-100%);
   opacity: 0;
   overflow: auto;
-  pointer-events: none; 
-  visibility: hidden; 
+  pointer-events: none;
+  visibility: hidden;
   transition: transform 0.35s ease, opacity 0.35s ease;
   @include a.glassy;
   background: linear-gradient(

@@ -311,6 +311,10 @@ body {
 }
 
 .sidebar {
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 0.25s;
+  --t-med: 0.35s;
+  --t-vis: var(--t-med);
   width: clamp(10.625rem, 8.5714285714rem + 10.2678571429vw, 17.8125rem);
   position: fixed;
   top: 6.25rem;
