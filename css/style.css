@@ -413,3 +413,8 @@ body.sidebar-open .sidebar {
   -webkit-transition: opacity 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
   transition: opacity 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+
+body.sidebar-open .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
