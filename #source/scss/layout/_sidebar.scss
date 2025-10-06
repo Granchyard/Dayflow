@@ -8,6 +8,7 @@
 
   @include a.clamp-size(width, 170, 285);
   position: fixed;
+  z-index: 101;
   top: a.rem(100);
   bottom: a.rem(20);
   left: calc(50% - (clamp(a.rem(250), 90%, a.rem(1440)) / 2));
@@ -16,12 +17,13 @@
   overflow: auto;
   pointer-events: none;
   visibility: hidden;
-  transition: transform 0.35s ease, opacity 0.35s ease;
   @include a.glassy;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.12),
     rgba(255, 255, 255, 0.05)
   );
-  z-index: 101;
+  contain: layout paint;
+  transition: transform var(--t-med) var(--ease),
+    opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis);
 }

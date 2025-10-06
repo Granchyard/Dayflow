@@ -317,6 +317,7 @@ body {
   --t-vis: var(--t-med);
   width: clamp(10.625rem, 8.5714285714rem + 10.2678571429vw, 17.8125rem);
   position: fixed;
+  z-index: 101;
   top: 6.25rem;
   bottom: 1.25rem;
   left: calc(50% - clamp(15.625rem, 90%, 90rem) / 2);
@@ -327,10 +328,6 @@ body {
   overflow: auto;
   pointer-events: none;
   visibility: hidden;
-  -webkit-transition: opacity 0.35s ease, -webkit-transform 0.35s ease;
-  transition: opacity 0.35s ease, -webkit-transform 0.35s ease;
-  transition: transform 0.35s ease, opacity 0.35s ease;
-  transition: transform 0.35s ease, opacity 0.35s ease, -webkit-transform 0.35s ease;
   background: #10223f;
   border: 1px solid rgba(255, 255, 255, 0.2);
   -webkit-box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
@@ -339,7 +336,11 @@ body {
   overflow: hidden;
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.12)), to(rgba(255, 255, 255, 0.05)));
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
-  z-index: 101;
+  contain: layout paint;
+  -webkit-transition: opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis), -webkit-transform var(--t-med) var(--ease);
+  transition: opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis), -webkit-transform var(--t-med) var(--ease);
+  transition: transform var(--t-med) var(--ease), opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis);
+  transition: transform var(--t-med) var(--ease), opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis), -webkit-transform var(--t-med) var(--ease);
 }
 
 .content {
