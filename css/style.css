@@ -356,6 +356,19 @@ body {
           flex-direction: column;
   gap: 0.625rem;
 }
+.sidebar__item button {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  font-size: clamp(0.9375rem, 0.7589285714rem + 0.8928571429vw, 1.5625rem);
+  line-height: 1.5;
+  letter-spacing: 1px;
+  -webkit-transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), -webkit-transform var(--t-fast) var(--ease), -webkit-box-shadow var(--t-fast) var(--ease);
+  transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), -webkit-transform var(--t-fast) var(--ease), -webkit-box-shadow var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), -webkit-transform var(--t-fast) var(--ease), -webkit-box-shadow var(--t-fast) var(--ease);
+}
 
 .content {
   min-height: calc(100vh - 2.5rem - 3.75rem - 1.25rem);
