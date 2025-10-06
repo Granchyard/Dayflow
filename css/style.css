@@ -342,6 +342,20 @@ body {
   transition: transform var(--t-med) var(--ease), opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis);
   transition: transform var(--t-med) var(--ease), opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis), -webkit-transform var(--t-med) var(--ease);
 }
+.sidebar__menu {
+  min-height: 100%;
+  padding: 1.25rem;
+}
+.sidebar__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.625rem;
+}
 
 .content {
   min-height: calc(100vh - 2.5rem - 3.75rem - 1.25rem);

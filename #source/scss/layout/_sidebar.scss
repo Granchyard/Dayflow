@@ -26,4 +26,15 @@
   contain: layout paint;
   transition: transform var(--t-med) var(--ease),
     opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis);
+
+    &__menu {
+    min-height: 100%;
+    padding: a.rem(20);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: a.rem(10);
+  }
 }
