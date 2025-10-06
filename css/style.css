@@ -278,6 +278,24 @@ body {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
+body.sidebar-open .header__burger-button span {
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  opacity: 0;
+}
+body.sidebar-open .header__burger-button::before {
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(45deg);
+      -ms-transform: translateY(-50%) rotate(45deg);
+          transform: translateY(-50%) rotate(45deg);
+}
+body.sidebar-open .header__burger-button::after {
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+      -ms-transform: translateY(-50%) rotate(-45deg);
+          transform: translateY(-50%) rotate(-45deg);
+}
 .header__controls {
   display: -webkit-box;
   display: -ms-flexbox;
