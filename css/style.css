@@ -150,6 +150,10 @@ body::-webkit-scrollbar-thumb:hover {
   overflow: visible;
 }
 
+body.sidebar-open {
+  overflow: hidden;
+}
+
 html {
   font-size: 16px;
 }
