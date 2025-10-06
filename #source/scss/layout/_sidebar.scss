@@ -27,7 +27,7 @@
   transition: transform var(--t-med) var(--ease),
     opacity var(--t-med) var(--ease), visibility 0s linear var(--t-vis);
 
-    &__menu {
+  &__menu {
     min-height: 100%;
     padding: a.rem(20);
   }
@@ -65,4 +65,13 @@
       outline: none;
     }
   }
+}
+
+body.sidebar-open .sidebar {
+  --t-vis: 0s;
+
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
