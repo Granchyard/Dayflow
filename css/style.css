@@ -97,7 +97,7 @@ img {
 }
 
 body {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(31, 41, 55, 0.9)), url("/img/bg/background-main.webp");
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(31, 41, 55, 0.9)), url("../img/bg/background-main.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
