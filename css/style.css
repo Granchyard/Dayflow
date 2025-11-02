@@ -312,6 +312,46 @@ body.sidebar-open {
             transform: scaleY(0.8) translateY(-2.5rem);
   }
 }
+@-webkit-keyframes rotateCube {
+  from {
+    -webkit-transform: rotateX(-25deg) rotateY(0deg);
+            transform: rotateX(-25deg) rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateX(-25deg) rotateY(360deg);
+            transform: rotateX(-25deg) rotateY(360deg);
+  }
+}
+@keyframes rotateCube {
+  from {
+    -webkit-transform: rotateX(-25deg) rotateY(0deg);
+            transform: rotateX(-25deg) rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateX(-25deg) rotateY(360deg);
+            transform: rotateX(-25deg) rotateY(360deg);
+  }
+}
+@-webkit-keyframes chargeGlow {
+  0%, 100% {
+    -webkit-box-shadow: 0 0 20px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(0, 234, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(0, 234, 255, 0.2);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 60px rgb(0, 234, 255), inset 0 0 40px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 60px rgb(0, 234, 255), inset 0 0 40px rgba(0, 234, 255, 0.8);
+  }
+}
+@keyframes chargeGlow {
+  0%, 100% {
+    -webkit-box-shadow: 0 0 20px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(0, 234, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 234, 255, 0.4), inset 0 0 20px rgba(0, 234, 255, 0.2);
+  }
+  50% {
+    -webkit-box-shadow: 0 0 60px rgb(0, 234, 255), inset 0 0 40px rgba(0, 234, 255, 0.8);
+            box-shadow: 0 0 60px rgb(0, 234, 255), inset 0 0 40px rgba(0, 234, 255, 0.8);
+  }
+}
 html {
   font-size: 16px;
 }
