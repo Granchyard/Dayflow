@@ -87,3 +87,16 @@
       inset 0 0 40px rgba(0, 234, 255, 0.8);
   }
 }
+
+// players glow
+
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.5), 0 0 20px rgba(0, 245, 255, 0.3),
+      inset 0 0 6px rgba(0, 245, 255, 0.2);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.9), 0 0 30px rgba(0, 245, 255, 0.6),
+      inset 0 0 12px rgba(0, 245, 255, 0.4);
+  }
+}
