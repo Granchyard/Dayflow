@@ -672,6 +672,80 @@ body.sidebar-open .overlay {
   overflow: hidden;
   grid-area: streak;
 }
+.random__button-block {
+  width: 9.375rem;
+  height: 3.125rem;
+  grid-area: button;
+  align-self: start;
+  justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.random__button-start {
+  --size-btn-start: 46px;
+  --bg: #0ae;
+  --icon: #06141f;
+  --glow: #00eaff;
+  position: relative;
+  width: var(--size-btn-start);
+  height: var(--size-btn-start);
+  border-radius: 50%;
+  background: var(--bg);
+  cursor: pointer;
+  display: inline-block;
+  opacity: 1;
+  color: var(--icon);
+  line-height: 0;
+  -webkit-box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12), 0 0 22px rgba(0, 234, 255, 0.35);
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12), 0 0 22px rgba(0, 234, 255, 0.35);
+  -webkit-transition: opacity 0.3s ease, background 0.2s ease, -webkit-transform 0.12s ease, -webkit-box-shadow 0.2s ease;
+  transition: opacity 0.3s ease, background 0.2s ease, -webkit-transform 0.12s ease, -webkit-box-shadow 0.2s ease;
+  transition: opacity 0.3s ease, transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: opacity 0.3s ease, transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease, -webkit-transform 0.12s ease, -webkit-box-shadow 0.2s ease;
+}
+.random__button-start::after {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 38px var(--glow);
+          box-shadow: 0 0 38px var(--glow);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.random__button-start::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-38%, -50%);
+      -ms-transform: translate(-38%, -50%);
+          transform: translate(-38%, -50%);
+  width: 0;
+  height: 0;
+  border-top: calc(var(--size-btn-start) * 0.18) solid transparent;
+  border-bottom: calc(var(--size-btn-start) * 0.18) solid transparent;
+  border-left: calc(var(--size-btn-start) * 0.3) solid var(--icon);
+}
+.random__button-start:hover {
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
+  -webkit-box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18), 0 0 28px rgba(0, 234, 255, 0.55);
+          box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18), 0 0 28px rgba(0, 234, 255, 0.55);
+}
+.random__button-start:active {
+  -webkit-transform: scale(0.97);
+      -ms-transform: scale(0.97);
+          transform: scale(0.97);
+}
 .random__history {
   background: #10223f;
   border: 1px solid rgba(255, 255, 255, 0.2);
