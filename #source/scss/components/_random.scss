@@ -208,6 +208,16 @@
   &__player2 {
     grid-area: player2;
   }
+
+  &__streak {
+    @include a.glassy;
+    grid-area: streak;
+  }
+
+  &__history {
+    @include a.glassy;
+    grid-area: history;
+  }
 }
 
 .random-players {
@@ -269,4 +279,35 @@
   pointer-events: none;
   user-select: none;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.random__history-log,
+.random__streak-subtitle {
+  flex: 1;
+  padding-right: a.rem(8);
+  @include a.customScroll;
+  contain: content;
+}
+
+.random__streak-container,
+.random__history-container {
+  flex: 1;
+  padding: a.rem(15);
+  display: flex;
+  flex-direction: column;
+  gap: a.rem(15);
+}
+
+.random__history,
+.random__streak {
+  display: flex;
+  contain: layout paint;
+}
+
+.random-players-name,
+.random__history-title,
+.random__streak-title {
+  @include a.clamp-font(14, 20);
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
