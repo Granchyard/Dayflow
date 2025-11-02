@@ -115,15 +115,16 @@ body {
 /* Scroll main*/
 html,
 body {
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 255, 255, 0.6) transparent;
+  scrollbar-color: rgb(var(--c-cyan-rgb)/0.6) transparent;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: var(--scroll-size);
+  height: var(--scroll-size);
 }
 
 html::-webkit-scrollbar-track,
@@ -133,10 +134,10 @@ body::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.6);
+  background: rgb(var(--c-cyan-rgb)/0.6);
   border-radius: 10px;
-  -webkit-box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
-          box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+  -webkit-box-shadow: 0 0 6px rgb(var(--c-cyan-rgb)/0.7);
+          box-shadow: 0 0 6px rgb(var(--c-cyan-rgb)/0.7);
   -webkit-transition: background 0.2s, -webkit-box-shadow 0.2s;
   transition: background 0.2s, -webkit-box-shadow 0.2s;
   transition: background 0.2s, box-shadow 0.2s;
@@ -145,9 +146,9 @@ body::-webkit-scrollbar-thumb {
 
 html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 255, 0.9);
-  -webkit-box-shadow: 0 0 12px rgb(0, 255, 255);
-          box-shadow: 0 0 12px rgb(0, 255, 255);
+  background: rgb(var(--c-cyan-rgb)/0.9);
+  -webkit-box-shadow: 0 0 12px var(--c-cyan);
+          box-shadow: 0 0 12px var(--c-cyan);
 }
 
 /* SVG */

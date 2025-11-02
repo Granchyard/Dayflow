@@ -24,34 +24,36 @@ body {
 
 html,
 body {
+  overflow-x: hidden;
   overflow-y: auto;
+
   scrollbar-width: thin;
-  scrollbar-color: #{$scroll-color} #{$scroll-track};
+  scrollbar-color: rgb(var(--c-cyan-rgb) / 0.6) transparent;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: $scroll-size;
-  height: $scroll-size;
+  width: var(--scroll-size);
+  height: var(--scroll-size);
 }
 
 html::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
-  background: $scroll-track;
+  background: transparent;
 }
 
 html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
-  background: $scroll-color;
+  background: rgb(var(--c-cyan-rgb) / 0.6);
   border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 6px rgb(var(--c-cyan-rgb) / 0.7);
   transition: background 0.2s, box-shadow 0.2s;
 }
 
 html::-webkit-scrollbar-thumb:hover,
 body::-webkit-scrollbar-thumb:hover {
-  background: $scroll-hover;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 1);
+  background: rgb(var(--c-cyan-rgb) / 0.9);
+  box-shadow: 0 0 12px var(--c-cyan);
 }
 
 /* SVG */
