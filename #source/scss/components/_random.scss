@@ -1,1 +1,22 @@
 @use "../abstracts" as a;
+
+.random {
+  display: flex;
+  flex: 1;
+
+  &__container {
+    display: grid;
+    flex: 1;
+
+    grid-template-areas:
+      "winner   winner   winner"
+      "player1  main     player2"
+      "streak   button   history";
+    grid-template-columns: 1fr minmax(a.rem(280), 1.5fr) 1fr;
+    grid-template-rows: minmax(a.rem(40), a.rem(50)) auto minmax(
+        a.rem(150),
+        a.rem(200)
+      );
+    @include a.clamp-size(gap, 15, 20);
+  }
+}
