@@ -1,1 +1,64 @@
 @use "functions" as f;
+
+// cube number and lines
+
+@keyframes group-fly-up {
+  0% {
+    transform: translate(-50%, 0) scale(0.7);
+    opacity: 0;
+    filter: blur(6px);
+  }
+  15% {
+    transform: translate(-50%, f.rem(-20)) scale(1.05);
+    opacity: 1;
+    filter: blur(0);
+  }
+  50% {
+    transform: translate(-50%, f.rem(-50)) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, f.rem(-70)) scale(0.98);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, f.rem(-90)) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes holo-fly-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.6);
+    filter: blur(4px);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, f.rem(-20)) scale(1.05);
+    filter: blur(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, f.rem(-55)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, f.rem(-90)) scale(0.9);
+  }
+}
+
+@keyframes energy-move {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0.8) translateY(f.rem(-40));
+  }
+}
