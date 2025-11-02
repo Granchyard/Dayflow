@@ -1,3 +1,12 @@
+:root {
+  --c-cyan: #00f0ff;
+  --c-cyan-rgb: 0 240 255;
+  --c-magenta: #ff00ff;
+  --c-magenta-rgb: 255 0 255;
+
+  --scroll-size: 8px;
+}
+
 body {
   background: linear-gradient(
       135deg,
@@ -12,10 +21,6 @@ body {
 }
 
 /* Scroll main*/
-$scroll-size: 8px !default;
-$scroll-color: rgba(0, 255, 255, 0.6) !default;
-$scroll-hover: rgba(0, 255, 255, 0.9) !default;
-$scroll-track: transparent !default;
 
 html,
 body {

@@ -96,6 +96,14 @@ img {
   vertical-align: top;
 }
 
+:root {
+  --c-cyan: #00f0ff;
+  --c-cyan-rgb: 0 240 255;
+  --c-magenta: #ff00ff;
+  --c-magenta-rgb: 255 0 255;
+  --scroll-size: 8px;
+}
+
 body {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(31, 41, 55, 0.9)), url("../img/bg/background-main.webp");
   background-repeat: no-repeat;
