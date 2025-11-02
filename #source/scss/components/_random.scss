@@ -458,3 +458,13 @@
     hyphens: manual;
   }
 }
+
+.btn-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-gone {
+  display: none;
+}
