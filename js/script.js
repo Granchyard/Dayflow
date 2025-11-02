@@ -265,3 +265,20 @@ function playCubeAnimation() {
     }, 2000);
   });
 }
+
+attachPlayHandler();
+randomButtonStart.addEventListener("click", () => {
+  if (randomWinner.classList.contains("show-winner")) {
+    randomWinner.classList.remove("show-winner");
+  }
+
+  const onEnd = (e) => {
+    if (e.target !== randomButtonStart || e.propertyName !== "opacity") return;
+    randomButtonStart.classList.add("btn-gone");
+    showPlay(); 
+    showQueue();
+  };
+
+  randomButtonStart.addEventListener("transitionend", onEnd, { once: true });
+  randomButtonStart.classList.add("btn-hidden");
+});
