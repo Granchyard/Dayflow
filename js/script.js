@@ -282,3 +282,28 @@ randomButtonStart.addEventListener("click", () => {
   randomButtonStart.addEventListener("transitionend", onEnd, { once: true });
   randomButtonStart.classList.add("btn-hidden");
 });
+
+let playLocked = false;
+
+async function onPlayClick() {
+  if (playLocked) return; 
+  playLocked = true;
+
+  cancelPlayDeadline();
+  await playCubeAnimation();
+  playLocked = false;
+  cancel();
+
+  if (lastQueuePlayer === 1) {
+    forceQueuePlayer = 2;
+  } else if (lastQueuePlayer === 2) {
+    forceQueuePlayer = 1;
+  }
+
+  showQueue(true);
+}
+
+function attachPlayHandler() {
+  randomButtonPlay.removeEventListener("click", onPlayClick);
+  randomButtonPlay.addEventListener("click", onPlayClick, { once: true });
+}
