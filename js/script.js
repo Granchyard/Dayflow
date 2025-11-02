@@ -104,3 +104,75 @@ function restartGame(reason = "") {
 
   attachPlayHandler();
 }
+
+let queueDelayId = null; 
+let queueActiveId = null; 
+
+function cancel() {
+  if (queueDelayId) {
+    clearTimeout(queueDelayId);
+    queueDelayId = null;
+  }
+  if (queueActiveId) {
+    clearTimeout(queueActiveId);
+    queueActiveId = null;
+  }
+  
+  randomPlayer1?.classList.remove("queue-active");
+  randomPlayer2?.classList.remove("queue-active");
+}
+
+let lastQueuePlayer = null; 
+let forceQueuePlayer = null;
+
+function showPlay() {
+ 
+  randomButtonPlay.classList.remove("btn-gone");
+  void randomButtonPlay.offsetWidth;
+  randomButtonPlay.classList.remove("btn-hidden");
+}
+
+function showQueue(once = false) {
+  if (once) {
+    if (showQueue._doneOnce) return; 
+    showQueue._doneOnce = true; 
+  }
+
+  let queue = Math.floor(Math.random() * 2) + 1; // 1 or 2
+
+  if (forceQueuePlayer === 1 || forceQueuePlayer === 2) {
+    queue = forceQueuePlayer;
+    forceQueuePlayer = null;
+  }
+  lastQueuePlayer = queue;
+
+  if (queue === 1) {
+    // Player 1 starts
+    queueDelayId = setTimeout(() => {
+      randomPlayer1.classList.add("queue-active");
+
+      startPlayDeadline(15000);
+      attachPlayHandler();
+
+      queueActiveId = setTimeout(() => {
+        randomPlayer1.classList.remove("queue-active");
+        queueActiveId = null; 
+      }, 15000);
+      queueDelayId = null; 
+    }, 100);
+  } else {
+    // Player 2 starts
+    queueDelayId = setTimeout(() => {
+      randomPlayer2.classList.add("queue-active");
+
+      startPlayDeadline(15000);
+      attachPlayHandler();
+
+      queueActiveId = setTimeout(() => {
+        randomPlayer2.classList.remove("queue-active");
+        queueActiveId = null;
+      }, 15000);
+      queueDelayId = null;
+    }, 100);
+  }
+}
