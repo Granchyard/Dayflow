@@ -960,3 +960,25 @@ body.sidebar-open .overlay {
     grid-template-areas: "winner  winner" "main    main" "button  button" "player1 player2" "streak  history";
   }
 }
+@media (max-width: 35em) {
+  .random__container {
+    grid-template-areas: "winner  winner" "main    main" "button  button" "player1 player2" "streak  streak" "history  history";
+    grid-template-columns: minmax(6.25rem, 1fr) minmax(6.25rem, 1fr);
+    grid-template-rows: auto auto 3.125rem 12.5rem minmax(6.25rem, 12.5rem) minmax(6.25rem, 12.5rem);
+    gap: clamp(0.625rem, 0.5535714286rem + 0.3571428571vw, 0.875rem);
+  }
+  .random__winner-text {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: clamp(0.8125rem, 0.7232142857rem + 0.4464285714vw, 1.125rem);
+  }
+  .random__winner-name {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    -ms-hyphens: manual;
+        hyphens: manual;
+  }
+}

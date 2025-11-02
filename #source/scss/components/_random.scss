@@ -428,3 +428,33 @@
       "streak  history";
   }
 }
+
+@media (max-width: 35em) {
+  .random__container {
+    grid-template-areas:
+      "winner  winner"
+      "main    main"
+      "button  button"
+      "player1 player2"
+      "streak  streak"
+      "history  history";
+
+    grid-template-columns: minmax(a.rem(100), 1fr) minmax(a.rem(100), 1fr);
+    grid-template-rows:
+      auto auto a.rem(50) a.rem(200) minmax(a.rem(100), a.rem(200))
+      minmax(a.rem(100), a.rem(200));
+    @include a.clamp-size(gap, 10, 14);
+  }
+
+  .random__winner-text {
+    flex-wrap: wrap;
+    justify-content: center;
+    @include a.clamp-font(13, 18);
+  }
+
+  .random__winner-name {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: manual;
+  }
+}
