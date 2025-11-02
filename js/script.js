@@ -68,3 +68,39 @@ const randomHistory = document.querySelector(".random__history");
 
 const randomButtonStart = document.querySelector(".random__button-start");
 const randomButtonPlay = document.querySelector(".random__button-play");
+
+let playDeadlineId = null;
+
+function startPlayDeadline(ms = 15000) {
+  cancelPlayDeadline();
+  playDeadlineId = setTimeout(() => {
+    restartGame("play-timeout");
+  }, ms);
+}
+
+function cancelPlayDeadline() {
+  if (playDeadlineId) {
+    clearTimeout(playDeadlineId);
+    playDeadlineId = null;
+  }
+}
+
+function restartGame(reason = "") {
+  cancel();
+  cancelPlayDeadline();
+
+  lastQueuePlayer = null;
+  forceQueuePlayer = null;
+  cubeResultPlayerOne = null;
+  cubeResultPlayerTwo = null;
+  showQueue._doneOnce = false;
+
+  randomPlayer1Count.textContent = "0";
+  randomPlayer2Count.textContent = "0";
+
+  randomButtonPlay.classList.add("btn-hidden", "btn-gone");
+
+  randomButtonStart.classList.remove("btn-hidden", "btn-gone");
+
+  attachPlayHandler();
+}
