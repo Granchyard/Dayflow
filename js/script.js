@@ -176,3 +176,92 @@ function showQueue(once = false) {
     }, 100);
   }
 }
+
+let cubeResultPlayerOne = null;
+let cubeResultPlayerTwo = null;
+
+//cube
+
+function playCubeAnimation() {
+  return new Promise((resolve) => {
+    const cubeContainer = document.querySelector(".random__cube-container");
+    cubeContainer.classList.add("random__cube-wrapper--charging");
+
+    setTimeout(() => {
+      cubeContainer.classList.remove("random__cube-wrapper--charging");
+
+      const effects = document.querySelector(".random__effects");
+
+      const group = document.createElement("div");
+      group.classList.add("random__energy-group");
+      effects.appendChild(group);
+
+      const holo = document.createElement("div");
+      holo.classList.add("random__holo-number");
+
+      const cubeNumber = (holo.innerText = Math.floor(Math.random() * 100));
+
+      group.appendChild(holo);
+
+      for (let i = 0; i < 18; i++) {
+        const line = document.createElement("div");
+        line.classList.add("random__energy-line");
+
+        const offsetX = (Math.random() - 0.5) * 100;
+        const offsetY = (Math.random() - 0.5) * 100;
+        line.style.left = `${offsetX}px`;
+        line.style.top = `${offsetY}px`;
+        line.style.height = 30 + Math.random() * 40 + "px";
+
+        group.appendChild(line);
+      }
+
+      setTimeout(() => group.remove(), 2200);
+
+      resolve({ cubeEnd: true });
+
+      if (lastQueuePlayer === 1) {
+        randomPlayer1Count.textContent = cubeNumber;
+        cubeResultPlayerOne = cubeNumber;
+      } else if (lastQueuePlayer === 2) {
+        randomPlayer2Count.textContent = cubeNumber;
+        cubeResultPlayerTwo = cubeNumber;
+      }
+
+      if (cubeResultPlayerOne !== null && cubeResultPlayerTwo !== null) {
+        if (cubeResultPlayerOne > cubeResultPlayerTwo) {
+          randomWinner.classList.add("show-winner");
+          randomWinnerName.textContent = "@Player1";
+
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+
+        } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
+          randomWinner.classList.add("show-winner");
+          randomWinnerName.textContent = "@Player2";
+
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+
+        } else {
+          randomWinner.classList.add("show-winner");
+          randomWinnerName.textContent = "Friendship";
+
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+        }
+      }
+
+      randomWinner.addEventListener(
+        "transitionend",
+        () => {
+          restartGame("winner-finished");
+        },
+        { once: true }
+      );
+    }, 2000);
+  });
+}
