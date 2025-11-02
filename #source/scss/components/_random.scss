@@ -79,4 +79,70 @@
   &__player1 {
     grid-area: player1;
   }
+
+  &__main-block {
+    min-height: clamp(a.rem(200), 45vw, a.rem(250));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: main;
+    align-self: end;
+  }
+
+  &__cube-container {
+    position: relative;
+    z-index: 1;
+    width: a.$cube-size;
+    height: a.$cube-size;
+
+    &.random__cube-wrapper--charging .random__face {
+      animation: chargeGlow 2s ease-in-out infinite;
+    }
+  }
+
+  &__cube {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotateCube 16s linear infinite;
+    backface-visibility: hidden;
+  }
+
+  &__face {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--c-cyan);
+    background: rgb(var(--c-cyan-rgb) / 0.05);
+    box-shadow: 0 0 20px rgb(var(--c-cyan-rgb) / 0.6);
+  }
+
+  &__face--front {
+    transform: translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--back {
+    transform: rotateY(180deg) translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--right {
+    transform: rotateY(90deg) translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--left {
+    transform: rotateY(-90deg) translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--top {
+    transform: rotateX(90deg) translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--bottom {
+    transform: rotateX(-90deg) translateZ(calc(a.$cube-size / 2));
+  }
+
+  &__face--back,
+  &__face--bottom {
+    box-shadow: none;
+  }
 }
