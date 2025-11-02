@@ -412,3 +412,19 @@
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
+@media (max-width: 54em) {
+  .random__container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto a.rem(50) a.rem(250) minmax(
+        a.rem(200),
+        a.rem(300)
+      );
+    grid-template-areas:
+      "winner  winner"
+      "main    main"
+      "button  button"
+      "player1 player2"
+      "streak  history";
+  }
+}

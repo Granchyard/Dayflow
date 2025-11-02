@@ -952,3 +952,11 @@ body.sidebar-open .overlay {
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
+@media (max-width: 54em) {
+  .random__container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 3.125rem 15.625rem minmax(12.5rem, 18.75rem);
+    grid-template-areas: "winner  winner" "main    main" "button  button" "player1 player2" "streak  history";
+  }
+}
