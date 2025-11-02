@@ -145,4 +145,63 @@
   &__face--bottom {
     box-shadow: none;
   }
+
+  &__glow {
+    position: absolute;
+    bottom: a.rem(-20);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 25%;
+    background: radial-gradient(
+      circle,
+      rgb(var(--c-cyan-rgb) / 0.5),
+      transparent 70%
+    );
+    filter: blur(30px);
+    opacity: 0.8;
+    contain: paint;
+  }
+
+  &__effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  &__energy-group {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    animation: group-fly-up 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  &__holo-number {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--c-cyan);
+    text-shadow: 0 0 15px var(--c-cyan), 0 0 30px var(--c-cyan);
+    opacity: 0;
+    animation: holo-fly-up 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  &__energy-line {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--c-cyan),
+      transparent
+    );
+    box-shadow: 0 0 10px var(--c-cyan);
+    opacity: 0.8;
+    animation: energy-move 3.5s linear forwards;
+  }
 }
