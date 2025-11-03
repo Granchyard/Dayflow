@@ -630,6 +630,11 @@ body.sidebar-open .sidebar {
   visibility: visible;
 }
 
+@media (max-width: 35em) {
+  .sidebar {
+    width: clamp(11.875rem, 9.9107142857rem + 9.8214285714vw, 18.75rem);
+  }
+}
 .content {
   min-height: calc(100vh - 2.5rem - 3.75rem - 1.25rem);
   min-height: calc(100svh - 2.5rem - 3.75rem - 1.25rem);

@@ -75,3 +75,9 @@ body.sidebar-open .sidebar {
   pointer-events: auto;
   visibility: visible;
 }
+
+@media (max-width: 35em) {
+  .sidebar {
+    @include a.clamp-size(width, 190, 300);
+  }
+}
