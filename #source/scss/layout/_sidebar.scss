@@ -43,7 +43,7 @@
     padding: a.rem(10) a.rem(14);
     border-radius: a.rem(10);
     font-weight: 600;
-    @include a.clamp-font(15, 25);
+    @include a.clamp-font(19, 25);
     line-height: 1.5;
     letter-spacing: 1px;
     transition: transform var(--t-fast) var(--ease),

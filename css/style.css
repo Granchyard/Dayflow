@@ -599,7 +599,7 @@ body.sidebar-open .header__burger-button::after {
   padding: 0.625rem 0.875rem;
   border-radius: 0.625rem;
   font-weight: 600;
-  font-size: clamp(0.9375rem, 0.7589285714rem + 0.8928571429vw, 1.5625rem);
+  font-size: clamp(1.1875rem, 1.0803571429rem + 0.5357142857vw, 1.5625rem);
   line-height: 1.5;
   letter-spacing: 1px;
   -webkit-transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), -webkit-transform var(--t-fast) var(--ease), -webkit-box-shadow var(--t-fast) var(--ease);
