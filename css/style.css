@@ -161,6 +161,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 body.sidebar-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 @-webkit-keyframes group-fly-up {

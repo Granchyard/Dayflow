@@ -66,4 +66,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 body.sidebar-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }

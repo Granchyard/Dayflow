@@ -105,8 +105,8 @@ function restartGame(reason = "") {
   attachPlayHandler();
 }
 
-let queueDelayId = null; 
-let queueActiveId = null; 
+let queueDelayId = null;
+let queueActiveId = null;
 
 function cancel() {
   if (queueDelayId) {
@@ -117,16 +117,15 @@ function cancel() {
     clearTimeout(queueActiveId);
     queueActiveId = null;
   }
-  
+
   randomPlayer1?.classList.remove("queue-active");
   randomPlayer2?.classList.remove("queue-active");
 }
 
-let lastQueuePlayer = null; 
+let lastQueuePlayer = null;
 let forceQueuePlayer = null;
 
 function showPlay() {
- 
   randomButtonPlay.classList.remove("btn-gone");
   void randomButtonPlay.offsetWidth;
   randomButtonPlay.classList.remove("btn-hidden");
@@ -134,8 +133,8 @@ function showPlay() {
 
 function showQueue(once = false) {
   if (once) {
-    if (showQueue._doneOnce) return; 
-    showQueue._doneOnce = true; 
+    if (showQueue._doneOnce) return;
+    showQueue._doneOnce = true;
   }
 
   let queue = Math.floor(Math.random() * 2) + 1; // 1 or 2
@@ -156,9 +155,9 @@ function showQueue(once = false) {
 
       queueActiveId = setTimeout(() => {
         randomPlayer1.classList.remove("queue-active");
-        queueActiveId = null; 
+        queueActiveId = null;
       }, 15000);
-      queueDelayId = null; 
+      queueDelayId = null;
     }, 100);
   } else {
     // Player 2 starts
@@ -236,7 +235,6 @@ function playCubeAnimation() {
           setTimeout(() => {
             randomWinner.classList.remove("show-winner");
           }, 10000);
-
         } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
           randomWinner.classList.add("show-winner");
           randomWinnerName.textContent = "@Player2";
@@ -244,7 +242,6 @@ function playCubeAnimation() {
           setTimeout(() => {
             randomWinner.classList.remove("show-winner");
           }, 10000);
-
         } else {
           randomWinner.classList.add("show-winner");
           randomWinnerName.textContent = "Friendship";
@@ -275,7 +272,7 @@ randomButtonStart.addEventListener("click", () => {
   const onEnd = (e) => {
     if (e.target !== randomButtonStart || e.propertyName !== "opacity") return;
     randomButtonStart.classList.add("btn-gone");
-    showPlay(); 
+    showPlay();
     showQueue();
   };
 
@@ -286,7 +283,7 @@ randomButtonStart.addEventListener("click", () => {
 let playLocked = false;
 
 async function onPlayClick() {
-  if (playLocked) return; 
+  if (playLocked) return;
   playLocked = true;
 
   cancelPlayDeadline();
