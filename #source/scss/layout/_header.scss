@@ -59,21 +59,6 @@
       bottom: 13px;
     }
 
-    &._active {
-      span {
-        transform: scale(0);
-        opacity: 0;
-      }
-      &::before {
-        top: 50%;
-        transform: translateY(-50%) rotate(45deg);
-      }
-      &::after {
-        top: 50%;
-        transform: translateY(-50%) rotate(-45deg);
-      }
-    }
-
     &:hover {
       span,
       &::before,
