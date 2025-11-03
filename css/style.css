@@ -159,6 +159,21 @@ body::-webkit-scrollbar-thumb:hover {
   overflow: visible;
 }
 
+/* main BG */
+.page-bg {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(31, 41, 55, 0.9)), url("/img/bg/background-main.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body.sidebar-open {
   overflow: hidden;
   position: fixed;
