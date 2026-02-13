@@ -708,6 +708,12 @@ body.sidebar-open .overlay {
   padding: 1.25rem;
 }
 
+body.active-home .home {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .random {
   display: -webkit-box;
   display: -ms-flexbox;

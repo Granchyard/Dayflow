@@ -14,3 +14,11 @@
     padding: a.rem(20);
   }
 }
+
+body.active-home {
+  .home {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
