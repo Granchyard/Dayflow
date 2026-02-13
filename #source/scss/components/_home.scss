@@ -1,0 +1,16 @@
+@use "../abstracts" as a;
+
+.home {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+
+  @include a.glassy;
+
+  &__container {
+    padding: a.rem(20);
+  }
+}
