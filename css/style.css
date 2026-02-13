@@ -1159,6 +1159,10 @@ body.sidebar-open .overlay {
   -webkit-box-shadow: 0 0 14px rgb(0, 255, 255);
           box-shadow: 0 0 14px rgb(0, 255, 255);
 }
+.random__history-log,
+.random__streak-subtitle {
+  contain: content;
+}
 
 .random__streak-container,
 .random__history-container {
