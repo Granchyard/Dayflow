@@ -540,6 +540,25 @@ body {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
+.header__menu-burger::before, .header__item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  opacity: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(var(--hl1)), to(var(--hl2)));
+  background: linear-gradient(to bottom, var(--hl1), var(--hl2));
+  border: 1px solid var(--hl-border);
+  -webkit-transition: opacity 0.14s ease;
+  transition: opacity 0.14s ease;
+}
+.header__menu-burger::before, .header__item::before {
+  -webkit-transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, -webkit-box-shadow 0.14s ease;
+}
 body.sidebar-open .header__burger-button span {
   -webkit-transform: scale(0);
       -ms-transform: scale(0);

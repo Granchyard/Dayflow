@@ -117,6 +117,21 @@ $hl-ease: ease;
     }
   }
 
+
+   &__menu-burger::before,
+  &__item::before {
+    @include hl-layer;
+  }
+
+  &__menu-burger::before,
+  &__item::before {
+    transition:
+      opacity $hl-dur $hl-ease,
+      background $hl-dur $hl-ease,
+      border-color $hl-dur $hl-ease,
+      box-shadow $hl-dur $hl-ease;
+  }
+
   body.sidebar-open &__burger-button {
     span {
       transform: scale(0);
