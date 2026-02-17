@@ -1,5 +1,24 @@
 @use "../abstracts" as a;
 
+$control-size: a.rem(48);
+$control-radius: a.rem(12);
+
+$hl-dur: 0.14s;
+$hl-ease: ease;
+
+@mixin hl-layer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: $control-radius;
+  pointer-events: none;
+
+  opacity: 0;
+  background: linear-gradient(to bottom, var(--hl1), var(--hl2));
+  border: 1px solid var(--hl-border);
+  transition: opacity $hl-dur $hl-ease;
+}
+
 .header {
   border-radius: a.rem(20);
   width: clamp(a.rem(250), 90%, a.rem(1440));
@@ -43,7 +62,10 @@
       height: 2px;
       border-radius: 1px;
       background-color: currentColor;
-      transition: transform 0.3s, opacity 0.3s, filter 0.3s;
+      transition:
+        transform 0.3s,
+        opacity 0.3s,
+        filter 0.3s;
       content: "";
     }
 
