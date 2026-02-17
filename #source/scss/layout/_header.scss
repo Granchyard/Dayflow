@@ -55,6 +55,22 @@ $hl-ease: ease;
     align-items: center;
   }
 
+  &__left-controls {
+    display: flex;
+    align-items: center;
+    gap: a.rem(6);
+  }
+
+  &__home {
+    > button {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  &__home,
   &__menu-burger,
   &__item {
     width: $control-size;
