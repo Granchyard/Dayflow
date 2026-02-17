@@ -16,7 +16,6 @@ $hl-ease: ease;
   opacity: 0;
   background: linear-gradient(to bottom, var(--hl1), var(--hl2));
   border: 1px solid var(--hl-border);
-  transition: opacity $hl-dur $hl-ease;
 }
 
 .header {

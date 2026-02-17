@@ -550,8 +550,6 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(var(--hl1)), to(var(--hl2)));
   background: linear-gradient(to bottom, var(--hl1), var(--hl2));
   border: 1px solid var(--hl-border);
-  -webkit-transition: opacity 0.14s ease;
-  transition: opacity 0.14s ease;
 }
 .header__menu-burger::before, .header__item::before {
   -webkit-transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
