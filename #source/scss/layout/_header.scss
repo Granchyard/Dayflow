@@ -39,9 +39,11 @@ $hl-ease: ease;
   left: 50%;
   transform: translateX(-50%);
   isolation: isolate;
-  contain: layout paint;
+
   @include a.glassy;
+
   z-index: 100;
+  overflow: visible;
 
   &__topbar {
     width: 100%;
@@ -116,8 +118,7 @@ $hl-ease: ease;
     }
   }
 
-
-   &__menu-burger::before,
+  &__menu-burger::before,
   &__item::before {
     @include hl-layer;
   }
