@@ -42,10 +42,14 @@ $hl-ease: ease;
     align-items: center;
   }
 
-  &__menu-burger {
+   &__menu-burger,
+  &__item {
+    width: $control-size;
+    height: $control-size;
     display: flex;
-    width: 44px;
-    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
   }
 
   &__burger-button {
@@ -119,21 +123,13 @@ $hl-ease: ease;
     gap: a.rem(20);
   }
 
-  &__item,
-  &__item button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__item button {
-    position: relative;
-  }
-
-  &__item button::before {
-    content: "";
-    position: absolute;
-    inset: -9.5px;
+   &__item {
+    > button {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    }
   }
 
   .icon-language,

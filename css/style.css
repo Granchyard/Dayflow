@@ -475,12 +475,19 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
-.header__menu-burger {
+.header__menu-burger, .header__item {
+  width: 3rem;
+  height: 3rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 44px;
-  aspect-ratio: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
 }
 .header__burger-button {
   -webkit-box-flex: 1;
@@ -551,24 +558,11 @@ body.sidebar-open .header__burger-button::after {
   display: flex;
   gap: 1.25rem;
 }
-.header__item, .header__item button {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-.header__item button {
-  position: relative;
-}
-.header__item button::before {
-  content: "";
-  position: absolute;
-  inset: -9.5px;
+.header__item > button {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 .header .icon-language,
 .header .icon-person {
