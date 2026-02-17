@@ -441,6 +441,15 @@ body {
 }
 
 .header {
+  --hl1: rgba(255, 255, 255, 0.06);
+  --hl2: rgba(255, 255, 255, 0.02);
+  --hl-border: rgba(255, 255, 255, 0.05);
+  --hl1-hover: rgba(255, 255, 255, 0.08);
+  --hl2-hover: rgba(255, 255, 255, 0.03);
+  --hl-border-hover: rgba(255, 255, 255, 0.07);
+  --hl1-active: rgba(255, 255, 255, 0.14);
+  --hl2-active: rgba(255, 255, 255, 0.06);
+  --hl-border-active: rgba(255, 255, 255, 0.12);
   border-radius: 1.25rem;
   width: clamp(15.625rem, 90%, 90rem);
   min-height: 3.75rem;
