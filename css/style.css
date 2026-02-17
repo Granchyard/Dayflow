@@ -555,7 +555,7 @@ body {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
-.header__menu-burger::before, .header__item::before {
+.header__home::before, .header__menu-burger::before, .header__item::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -566,11 +566,9 @@ body {
   background: linear-gradient(to bottom, var(--hl1), var(--hl2));
   border: 1px solid var(--hl-border);
 }
-.header__menu-burger::before, .header__item::before {
-  -webkit-transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
-  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
-  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
-  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, -webkit-box-shadow 0.14s ease;
+.header__home::before, .header__menu-burger::before {
+  -webkit-transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease;
 }
 body.sidebar-open .header__burger-button span {
   -webkit-transform: scale(0);
@@ -600,6 +598,12 @@ body.sidebar-open .header__burger-button::after {
   display: -ms-flexbox;
   display: flex;
   gap: 0.375rem;
+}
+.header__item::before {
+  -webkit-transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, -webkit-box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+  transition: opacity 0.14s ease, background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, -webkit-box-shadow 0.14s ease;
 }
 .header__item > button {
   width: 100%;

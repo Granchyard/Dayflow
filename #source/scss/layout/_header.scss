@@ -134,18 +134,18 @@ $hl-ease: ease;
     }
   }
 
+    &__home::before,
   &__menu-burger::before,
   &__item::before {
     @include hl-layer;
   }
 
-  &__menu-burger::before,
-  &__item::before {
+  &__home::before,
+  &__menu-burger::before {
     transition:
       opacity $hl-dur $hl-ease,
       background $hl-dur $hl-ease,
-      border-color $hl-dur $hl-ease,
-      box-shadow $hl-dur $hl-ease;
+      border-color $hl-dur $hl-ease;
   }
 
   body.sidebar-open &__burger-button {
@@ -172,13 +172,22 @@ $hl-ease: ease;
     gap: a.rem(6);
   }
 
-  &__item {
+   &__item {
+    &::before {
+      transition:
+        opacity $hl-dur $hl-ease,
+        background $hl-dur $hl-ease,
+        border-color $hl-dur $hl-ease,
+        box-shadow $hl-dur $hl-ease;
+    }
+
     > button {
       width: 100%;
       height: 100%;
       display: grid;
       place-items: center;
     }
+  
   }
 
   .icon-language,
