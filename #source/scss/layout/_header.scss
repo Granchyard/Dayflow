@@ -42,7 +42,7 @@ $hl-ease: ease;
     align-items: center;
   }
 
-   &__menu-burger,
+  &__menu-burger,
   &__item {
     width: $control-size;
     height: $control-size;
@@ -53,9 +53,11 @@ $hl-ease: ease;
   }
 
   &__burger-button {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     position: relative;
+    display: block;
 
     span,
     &::before,
@@ -70,12 +72,16 @@ $hl-ease: ease;
         transform 0.3s,
         opacity 0.3s,
         filter 0.3s;
-      content: "";
     }
 
     span {
       top: calc(50% - 1px);
       transform: none;
+    }
+
+    &::before,
+    &::after {
+      content: "";
     }
 
     &::before {
@@ -123,7 +129,7 @@ $hl-ease: ease;
     gap: a.rem(20);
   }
 
-   &__item {
+  &__item {
     > button {
       width: 100%;
       height: 100%;
