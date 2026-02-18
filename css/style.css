@@ -157,6 +157,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* SVG */
 .icon {
+  width: 100%;
+  height: 100%;
   stroke-width: 0;
   fill: currentColor;
   stroke: currentColor;
