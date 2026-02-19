@@ -186,6 +186,18 @@ body.sidebar-open {
   width: 100%;
 }
 
+.header,
+.sidebar,
+.overlay,
+.random {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-touch-callout: none; /* убирает меню "Copy/Look Up" на iOS */
+  -webkit-tap-highlight-color: transparent;
+}
+
 @-webkit-keyframes group-fly-up {
   0% {
     -webkit-transform: translate(-50%, 0) scale(0.7);

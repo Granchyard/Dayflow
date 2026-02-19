@@ -91,3 +91,13 @@ body.sidebar-open {
   position: fixed;
   width: 100%;
 }
+
+.header,
+.sidebar,
+.overlay,
+.random{
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;       /* убирает меню "Copy/Look Up" на iOS */
+  -webkit-tap-highlight-color: transparent;
+}
