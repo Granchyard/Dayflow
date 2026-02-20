@@ -191,3 +191,28 @@ body.register-active .register {
   transform: translateX(0);
   transition-delay: 0.25s;
 }
+
+.form-password {
+  padding-right: 40px;
+}
+
+.register__password-eye {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10.5px;
+}
+
+.register__password-block-password-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
