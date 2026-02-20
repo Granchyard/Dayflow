@@ -1111,6 +1111,31 @@ body.active-home .home {
   width: 50%;
 }
 
+.register-item {
+  text-align: center;
+}
+.register-item__title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.register-item__btn {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: rgb(0, 119, 255);
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.form-btn-register,
+.btn-register {
+  background-color: #57b758;
+}
+
 body.register-active .register {
   --t-vis: 0s;
   opacity: 1;
