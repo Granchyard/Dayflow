@@ -660,8 +660,8 @@
   .random__container {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto a.rem(50) a.rem(250) minmax(
-        a.rem(200),
-        a.rem(300)
+        a.rem(160),
+        a.rem(170)
       );
     grid-template-areas:
       "winner  winner"
@@ -669,6 +669,15 @@
       "button  button"
       "player1 player2"
       "streak  history";
+  }
+
+  .random__streak-container {
+    gap: a.rem(10);
+    padding: a.rem(12);
+  }
+
+  .random__streak-main {
+    column-gap: a.rem(12);
   }
 }
 
@@ -695,6 +704,17 @@
     @include a.clamp-font(13, 18);
   }
 
+  .random__winner-name {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: manual;
+  }
+
+  .random__streak-subtitle {
+    justify-self: center;
+    text-align: center;
+  }
+
   .random__streak-main {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -705,14 +725,12 @@
     align-items: center;
   }
 
-  .random__streak-player {
-    max-width: clamp(10rem, 60vw, 16rem);
+  .random__streak-count {
+    font-size: clamp(a.rem(32), 9vw, a.rem(52));
   }
 
-  .random__winner-name {
-    overflow-wrap: anywhere;
-    word-break: normal;
-    hyphens: manual;
+  .random__streak-player {
+    max-width: clamp(10rem, 60vw, 16rem);
   }
 }
 
