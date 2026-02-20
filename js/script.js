@@ -124,6 +124,149 @@ const randomButtonPlay = document.querySelector(".random__button-play");
 const randomPlayerOne = document.querySelector(".random__player1-name");
 const randomPlayerTwo = document.querySelector(".random__player2-name");
 
+
+// ===== FORMS VALIDATION CLASS =====
+
+class FormsValidation {
+  selectors = {
+    form: "[data-js-form]",
+    inputErrors: "[data-js-form-input-errors]",
+  };
+
+  errorMessages = {
+    valueMissing: () => "This field is required",
+    patternMismatch: ({ title }) =>
+      title || "The data does not match the format",
+    tooShort: ({ minLength }) =>
+      `Value is too short, minimum characters - ${minLength}`,
+    tooLong: ({ maxLength }) =>
+      `Value is too long, maximum characters - ${maxLength}`,
+    customError: (input) => input.validationMessage || "Invalid value",
+  };
+
+  clearForm(formElement) {
+    if (!formElement) return;
+
+    formElement.reset();
+
+    const errorBlocks = formElement.querySelectorAll(
+      this.selectors.inputErrors,
+    );
+    errorBlocks.forEach((block) => {
+      block.innerHTML = "";
+    });
+
+    const inputs = formElement.querySelectorAll(".register__form-input");
+    inputs.forEach((input) => {
+      input.ariaInvalid = false;
+      input.setCustomValidity("");
+      input.classList.remove("error-input-color");
+    });
+  }
+
+  constructor() {
+    this.bindEvents();
+  }
+
+  manageErrors(inputControlElement, errorMessages) {
+    const errorId = inputControlElement.getAttribute("aria-errormessage");
+    const registerFormInputBlock = document.getElementById(errorId);
+
+    if (!registerFormInputBlock) return;
+
+    registerFormInputBlock.innerHTML = errorMessages
+      .map((message) => `<span class="register__error">${message}</span>`)
+      .join("");
+  }
+
+  validateInput(inputControlElement) {
+    if (inputControlElement.name === "register-confirm-password") {
+      const form = inputControlElement.form;
+      const passwordInput = form.querySelector(
+        'input[name="register-password"]',
+      );
+
+      if (passwordInput && passwordInput.value && inputControlElement.value) {
+        if (passwordInput.value !== inputControlElement.value) {
+          inputControlElement.setCustomValidity("Passwords do not match");
+        } else {
+          inputControlElement.setCustomValidity("");
+        }
+      } else {
+        inputControlElement.setCustomValidity("");
+      }
+    }
+
+    const errors = inputControlElement.validity;
+    const errorMessages = [];
+
+    for (const [errorType, getErrorMessage] of Object.entries(
+      this.errorMessages,
+    )) {
+      if (errors[errorType]) {
+        errorMessages.push(getErrorMessage(inputControlElement));
+        break;
+      }
+    }
+
+    this.manageErrors(inputControlElement, errorMessages);
+
+    const isValid = errorMessages.length === 0;
+    inputControlElement.ariaInvalid = !isValid;
+
+    if (isValid) {
+      inputControlElement.classList.remove("error-input-color");
+    } else {
+      inputControlElement.classList.add("error-input-color");
+    }
+
+    return isValid;
+  }
+
+  onBlur(e) {
+    const { target } = e;
+
+    const isFormInput = target.closest(this.selectors.form);
+    const isRequired = target.required;
+
+    if (isFormInput && isRequired) {
+      this.validateInput(target);
+    }
+  }
+
+  onChange(e) {
+    const { target } = e;
+    const isRequired = target.required;
+    const isToggleType = ["radio", "checkbox"].includes(target.type);
+
+    if (isToggleType && isRequired) {
+      this.validateInput(target);
+    }
+  }
+
+  bindEvents() {
+    document.addEventListener("focusout", (e) => {
+      if (!e.target.classList.contains("register__form-input")) return;
+      this.onBlur(e);
+    });
+
+    document.addEventListener("focusin", (e) => {
+      const target = e.target;
+
+      if (!e.target.classList.contains("register__form-input")) return;
+
+      this.manageErrors(e.target, []);
+      e.target.ariaInvalid = false;
+      target.classList.remove("error-input-color");
+    });
+
+    document.addEventListener("change", (e) => this.onChange(e));
+  }
+}
+
+const formsValidation = new FormsValidation();
+
+
 let playDeadlineId = null;
 
 function startPlayDeadline(ms = 15000) {
