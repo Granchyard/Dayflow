@@ -1041,7 +1041,7 @@ body.active-home .home {
   width: clamp(6.25rem, 20vw, 9.375rem);
   height: clamp(6.25rem, 20vw, 9.375rem);
 }
-.random__cube-container.random__cube-wrapper--charging .random__face {
+.random__cube-container--charging .random__face {
   -webkit-animation: chargeGlow 2s ease-in-out infinite;
           animation: chargeGlow 2s ease-in-out infinite;
 }
@@ -1064,31 +1064,31 @@ body.active-home .home {
   -webkit-box-shadow: 0 0 20px rgb(var(--c-cyan-rgb)/0.6);
           box-shadow: 0 0 20px rgb(var(--c-cyan-rgb)/0.6);
 }
-.random__face--front {
+.random--front {
   -webkit-transform: translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--back {
+.random--back {
   -webkit-transform: rotateY(180deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: rotateY(180deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--right {
+.random--right {
   -webkit-transform: rotateY(90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: rotateY(90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--left {
+.random--left {
   -webkit-transform: rotateY(-90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: rotateY(-90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--top {
+.random--top {
   -webkit-transform: rotateX(90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: rotateX(90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--bottom {
+.random--bottom {
   -webkit-transform: rotateX(-90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
           transform: rotateX(-90deg) translateZ(calc(clamp(6.25rem, 20vw, 9.375rem) / 2));
 }
-.random__face--back, .random__face--bottom {
+.random--back, .random--bottom {
   -webkit-box-shadow: none;
           box-shadow: none;
 }

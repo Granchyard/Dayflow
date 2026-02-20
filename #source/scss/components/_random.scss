@@ -106,7 +106,7 @@
     width: a.$cube-size;
     height: a.$cube-size;
 
-    &.random__cube-wrapper--charging .random__face {
+    &--charging .random__face {
       animation: chargeGlow 2s ease-in-out infinite;
     }
   }
@@ -128,32 +128,32 @@
     box-shadow: 0 0 20px rgb(var(--c-cyan-rgb) / 0.6);
   }
 
-  &__face--front {
+  &--front {
     transform: translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--back {
+  &--back {
     transform: rotateY(180deg) translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--right {
+  &--right {
     transform: rotateY(90deg) translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--left {
+  &--left {
     transform: rotateY(-90deg) translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--top {
+  &--top {
     transform: rotateX(90deg) translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--bottom {
+  &--bottom {
     transform: rotateX(-90deg) translateZ(calc(a.$cube-size / 2));
   }
 
-  &__face--back,
-  &__face--bottom {
+  &--back,
+  &--bottom {
     box-shadow: none;
   }
 
