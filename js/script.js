@@ -9,6 +9,17 @@ const header = document.querySelector(".header");
 const burgerButton = document.querySelector(".header__burger-button");
 const sidebar = document.querySelector(".sidebar");
 const randomGame = document.querySelector(".sidebar__random-game");
+
+// account
+
+const accountMenu = document.querySelector(".person-menu-button-account");
+const accountCancelButton = document.querySelector(".account__cancel-button");
+const accountSaveButton = document.querySelector(".account__save-button");
+const avatarBox = document.querySelector(".account__avatar-list-container");
+const accountAvatarImgBlock = document.querySelector(
+  ".account__avatar-img-block",
+);
+
 const homeButton = document.querySelector(".header__home-button");
 
 // register
@@ -262,6 +273,15 @@ const randomWinnerName = document.querySelector(".random__winner-name");
 
 const randomButtonStart = document.querySelector(".random__button-start");
 const randomButtonPlay = document.querySelector(".random__button-play");
+
+const historyList = document.querySelector(".random__history-rows");
+const streakEl = document.querySelector(".random__streak-container");
+const historyEl = document.querySelector(".random__history-container");
+const randomStreakBestBlock = document.querySelector(".random__streak-best");
+const randomStreakCount = document.querySelector(".random__streak-count");
+const randomStreakBestValue = document.querySelector(
+  ".random__streak-best-value",
+);
 
 const randomPlayerOne = document.querySelector(".random__player1-name");
 const randomPlayerTwo = document.querySelector(".random__player2-name");
