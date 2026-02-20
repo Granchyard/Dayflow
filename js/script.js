@@ -137,12 +137,17 @@ let lastQueuePlayer = null;
 let forceQueuePlayer = null;
 
 function showPlay() {
+  if (!randomButtonPlay) return;
   randomButtonPlay.classList.remove("btn-gone");
   void randomButtonPlay.offsetWidth;
   randomButtonPlay.classList.remove("btn-hidden");
 }
 
 function showQueue(once = false) {
+
+  if (!randomPlayer1 || !randomPlayer2) return;
+  if (!randomButtonPlay) return;
+
   if (once) {
     if (showQueue._doneOnce) return;
     showQueue._doneOnce = true;
@@ -195,13 +200,14 @@ let cubeResultPlayerTwo = null;
 function playCubeAnimation() {
   return new Promise((resolve) => {
     const cubeContainer = document.querySelector(".random__cube-container");
-    cubeContainer.classList.add("random__cube-wrapper--charging");
+    if (!cubeContainer) return resolve({ cubeEnd: false });
+    cubeContainer.classList.add("random__cube-container--charging");
 
     setTimeout(() => {
-      cubeContainer.classList.remove("random__cube-wrapper--charging");
+      cubeContainer.classList.remove("random__cube-container--charging");
 
       const effects = document.querySelector(".random__effects");
-
+      if (!effects) return resolve({ cubeEnd: false });
       const group = document.createElement("div");
       group.classList.add("random__energy-group");
       effects.appendChild(group);
@@ -231,10 +237,10 @@ function playCubeAnimation() {
       resolve({ cubeEnd: true });
 
       if (lastQueuePlayer === 1) {
-        randomPlayer1Count.textContent = cubeNumber;
+        if (randomPlayer1Count) randomPlayer1Count.textContent = String(cubeNumber);
         cubeResultPlayerOne = cubeNumber;
       } else if (lastQueuePlayer === 2) {
-        randomPlayer2Count.textContent = cubeNumber;
+        if (randomPlayer2Count) randomPlayer2Count.textContent = String(cubeNumber);
         cubeResultPlayerTwo = cubeNumber;
       }
 
@@ -317,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function attachPlayHandler() {
+  if (!randomButtonPlay) return;
   randomButtonPlay.removeEventListener("click", onPlayClick);
   randomButtonPlay.addEventListener("click", onPlayClick, { once: true });
 }
