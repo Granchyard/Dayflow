@@ -1383,6 +1383,27 @@ body.active-home .home {
   min-height: 0;
   position: relative;
 }
+.random__history-container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0.9375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.9375rem;
+  min-height: 0;
+  min-width: 0;
+}
+.random__history-title {
+  font-size: clamp(0.875rem, 0.7678571429rem + 0.5357142857vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
 .random__history-log {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -1391,6 +1412,13 @@ body.active-home .home {
   max-width: 100%;
   min-height: 0;
   opacity: 0.85;
+}
+.random__history-log:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.18);
+  outline-offset: 2px;
+}
+.random__history-head {
+  padding-right: var(--sbw, 0px);
 }
 .random__history-rows {
   overflow: auto;
@@ -1568,67 +1596,6 @@ body.active-home .home {
           user-select: none;
   -webkit-transition: opacity 0.3s ease, visibility 0s linear 0.3s;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-}
-
-.random__history-log,
-.random__streak-subtitle {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding-right: 0.5rem;
-  overflow: auto;
-  /* Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: #00f5ff transparent;
-  /* WebKit */
-}
-.random__history-log::-webkit-scrollbar,
-.random__streak-subtitle::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.random__history-log::-webkit-scrollbar-track,
-.random__streak-subtitle::-webkit-scrollbar-track {
-  background: transparent;
-}
-.random__history-log::-webkit-scrollbar-thumb,
-.random__streak-subtitle::-webkit-scrollbar-thumb {
-  background: #00f5ff;
-  -webkit-box-shadow: 0 0 8px rgba(0, 255, 255, 0.9);
-          box-shadow: 0 0 8px rgba(0, 255, 255, 0.9);
-}
-.random__history-log::-webkit-scrollbar-thumb:hover,
-.random__streak-subtitle::-webkit-scrollbar-thumb:hover {
-  background: rgb(0, 255, 255);
-  -webkit-box-shadow: 0 0 14px rgb(0, 255, 255);
-          box-shadow: 0 0 14px rgb(0, 255, 255);
-}
-.random__history-log,
-.random__streak-subtitle {
-  contain: content;
-}
-
-.random__history-container {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 0.9375rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 0.9375rem;
-}
-
-.random__history,
-.random__streak {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  contain: layout paint;
 }
 
 .random-players-name,

@@ -441,6 +441,24 @@
     position: relative;
   }
 
+  &__history-container {
+    flex: 1;
+    padding: a.rem(15);
+
+    display: flex;
+    flex-direction: column;
+    gap: a.rem(15);
+
+    min-height: 0;
+    min-width: 0;
+  }
+
+  &__history-title {
+    @include a.clamp-font(14, 20);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
   &__history-log {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -451,6 +469,15 @@
     min-height: 0;
 
     opacity: 0.85;
+
+    &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.18);
+      outline-offset: 2px;
+    }
+  }
+
+  &__history-head {
+    padding-right: var(--sbw, 0px);
   }
 
   &__history-rows {
@@ -597,28 +624,6 @@
       opacity 0.3s ease,
       visibility 0s linear 0.3s;
   }
-}
-
-.random__history-log,
-.random__streak-subtitle {
-  flex: 1;
-  padding-right: a.rem(8);
-  @include a.customScroll;
-  contain: content;
-}
-
-.random__history-container {
-  flex: 1;
-  padding: a.rem(15);
-  display: flex;
-  flex-direction: column;
-  gap: a.rem(15);
-}
-
-.random__history,
-.random__streak {
-  display: flex;
-  contain: layout paint;
 }
 
 .random-players-name,
