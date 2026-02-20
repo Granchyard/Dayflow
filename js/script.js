@@ -28,6 +28,8 @@ const body = document.body;
 const overlay = document.querySelector(".overlay");
 const burgerButton = document.querySelector(".header__burger-button");
 const sidebar = document.querySelector(".sidebar");
+const randomGame = document.querySelector(".sidebar__random-game");
+const homeButton = document.querySelector(".header__home-button");
 
 const close = () => {
   body.classList.remove("sidebar-open");
@@ -41,6 +43,18 @@ burgerButton.addEventListener("click", toggle);
 overlay.addEventListener("click", close);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") close();
+});
+
+randomGame?.addEventListener("click", () => {
+  close();
+  body.classList.add("active-random");
+  body.classList.remove("active-home");
+});
+
+homeButton?.addEventListener("click", () => {
+  close();
+  body.classList.add("active-home");
+  body.classList.remove("active-random");
 });
 
 const randomPlayer1 = document.querySelector(".random__player1");
@@ -299,6 +313,11 @@ async function onPlayClick() {
 
   showQueue(true);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  body.classList.add("active-home");
+  body.classList.remove("active-random");
+});
 
 function attachPlayHandler() {
   randomButtonPlay.removeEventListener("click", onPlayClick);
