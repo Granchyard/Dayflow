@@ -497,6 +497,158 @@ class FormsValidation {
 
 const formsValidation = new FormsValidation();
 
+// ===== STATS / STREAK / HISTORY =====
+
+function isBotName(name) {
+  return String(name).trim() === BOT_NAME;
+}
+
+function isUserName(name) {
+  const auth = getAuth();
+  return !!auth && String(name).trim() === String(auth.username).trim();
+}
+
+function labelForPlayer(name) {
+  if (isBotName(name)) return "Bot";
+  if (isUserName(name)) return "You";
+  return String(name).trim();
+}
+
+function labelForWinner(name) {
+  if (name === "Friendship") return "Friendship";
+  if (isBotName(name)) return "Bot";
+  if (isUserName(name)) return "You";
+  return String(name).trim();
+}
+
+function loadStats() {
+  const auth = getAuth();
+  const localStorageAvailable = isLocalStorageAvailable();
+
+  if (localStorageAvailable && auth) {
+    const username = auth.username;
+    const stats = JSON.parse(localStorage.getItem("stats") || "{}");
+
+    if (!stats[username]) {
+      stats[username] = {
+        bestStreak: 0,
+        history: [],
+      };
+    }
+
+    localStorage.setItem("stats", JSON.stringify(stats));
+    setStreakBestValue(stats[username].bestStreak);
+  } else if (!localStorageAvailable) {
+    if (!storageWarned) {
+      alert("LocalStorage is not available in this browser mode.");
+      storageWarned = true;
+    }
+    return;
+  }
+}
+
+function updateBestStreak() {
+  const auth = getAuth();
+  if (!auth) return;
+
+  const username = auth.username;
+  const stats = JSON.parse(localStorage.getItem("stats") || "{}");
+
+  if (!stats[username]) {
+    stats[username] = { bestStreak: 0, history: [] };
+  }
+
+  if (userWinStreak > stats[username].bestStreak) {
+    stats[username].bestStreak = userWinStreak;
+    localStorage.setItem("stats", JSON.stringify(stats));
+  }
+
+  setStreakBestValue(stats[username].bestStreak);
+}
+
+function updateStreakUI() {
+  const auth = getAuth();
+  const nameEl = document.querySelector(".random__streak-player");
+
+  if (nameEl) nameEl.textContent = auth?.username ?? "Player";
+  setStreakBestValue(getBestStreak());
+}
+
+function streakAndHistoryAddClass() {
+  streakEl?.classList.add("unavailable-active");
+  historyEl?.classList.add("unavailable-active");
+}
+
+function streakAndHistoryUnavailable() {
+  streakEl.classList.remove("unavailable-active");
+  historyEl.classList.remove("unavailable-active");
+
+  const auth = getAuth();
+
+  if (!auth) {
+    streakAndHistoryAddClass();
+  }
+}
+
+function getUserSlot() {
+  const auth = getAuth();
+  if (!auth) return null;
+
+  const username = String(auth.username).trim();
+
+  if (String(randomPlayerOne.dataset.pid).trim() === username) return 1;
+  if (String(randomPlayerTwo.dataset.pid).trim() === username) return 2;
+
+  return null;
+}
+
+function setStreakCount(count) {
+  if (randomStreakCount) randomStreakCount.textContent = String(count);
+}
+
+function updateUserStreakAfterRound(winnerSlot) {
+  const auth = getAuth();
+  if (!auth) return;
+
+  const userSlot = getUserSlot();
+  if (!userSlot) return;
+
+  if (winnerSlot == null) {
+    userWinStreak = 0;
+    setStreakCount(userWinStreak);
+    return;
+  }
+
+  if (winnerSlot === userSlot) {
+    userWinStreak += 1;
+  } else {
+    userWinStreak = 0;
+  }
+
+  setStreakCount(userWinStreak);
+  updateBestStreak();
+}
+
+function getBestStreak() {
+  const auth = getAuth();
+  const username = auth?.username;
+  if (!username) return 0;
+
+  const stats = JSON.parse(localStorage.getItem("stats") || "{}");
+  return stats[username]?.bestStreak ?? 0;
+}
+
+function setStreakBestValue(value) {
+  if (randomStreakBestValue) randomStreakBestValue.textContent = String(value);
+}
+
+function bestStreakVisibility() {
+  const auth = getAuth();
+
+  if (!randomStreakBestBlock) return;
+  randomStreakBestBlock.classList.toggle("streak-best-block-active", !!auth);
+}
+
 // ===== AUTH + STORAGE =====
 
 function isLocalStorageAvailable() {
