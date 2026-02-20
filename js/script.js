@@ -60,28 +60,25 @@ homeButton?.addEventListener("click", () => {
 const randomPlayer1 = document.querySelector(".random__player1");
 const randomPlayer2 = document.querySelector(".random__player2");
 
-const randomPlayer1Count = randomPlayer1.querySelector(
+const randomPlayer1Count = randomPlayer1?.querySelector(
   ".random__player1-count"
 );
-const randomPlayer2Count = randomPlayer2.querySelector(
+const randomPlayer2Count = randomPlayer2?.querySelector(
   ".random__player2-count"
 );
 
-const randomPlayer1Ready = randomPlayer1.querySelector(
-  ".random__player1-ready"
-);
-const randomPlayer2Ready = randomPlayer2.querySelector(
-  ".random__player2-ready"
-);
+
 
 const randomWinner = document.querySelector(".random__winner");
 const randomWinnerName = document.querySelector(".random__winner-name");
 
-const randomStreak = document.querySelector(".random__streak");
-const randomHistory = document.querySelector(".random__history");
+
 
 const randomButtonStart = document.querySelector(".random__button-start");
 const randomButtonPlay = document.querySelector(".random__button-play");
+
+const randomPlayerOne = document.querySelector(".random__player1-name");
+const randomPlayerTwo = document.querySelector(".random__player2-name");
 
 let playDeadlineId = null;
 
