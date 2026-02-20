@@ -119,8 +119,8 @@
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    animation: rotateCube 16s linear infinite;
     backface-visibility: hidden;
+    animation: rotateCube 16s linear infinite;
   }
 
   &__face {
@@ -131,33 +131,33 @@
     box-shadow: 0 0 20px rgb(var(--c-cyan-rgb) / 0.6);
 
     &--front {
-    transform: translateZ(calc(a.$cube-size / 2));
-  }
+      transform: translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--back {
-    transform: rotateY(180deg) translateZ(calc(a.$cube-size / 2));
-  }
+    &--back {
+      transform: rotateY(180deg) translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--right {
-    transform: rotateY(90deg) translateZ(calc(a.$cube-size / 2));
-  }
+    &--right {
+      transform: rotateY(90deg) translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--left {
-    transform: rotateY(-90deg) translateZ(calc(a.$cube-size / 2));
-  }
+    &--left {
+      transform: rotateY(-90deg) translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--top {
-    transform: rotateX(90deg) translateZ(calc(a.$cube-size / 2));
-  }
+    &--top {
+      transform: rotateX(90deg) translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--bottom {
-    transform: rotateX(-90deg) translateZ(calc(a.$cube-size / 2));
-  }
+    &--bottom {
+      transform: rotateX(-90deg) translateZ(calc(a.$cube-size / 2));
+    }
 
-  &--back,
-  &--bottom {
-    box-shadow: none;
-  }
+    &--back,
+    &--bottom {
+      box-shadow: none;
+    }
   }
 
   &__glow {
@@ -677,8 +677,6 @@
   .random__streak-meta {
     align-items: center;
   }
-
-  
 
   .random__streak-player {
     max-width: clamp(10rem, 60vw, 16rem);

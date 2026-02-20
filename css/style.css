@@ -1051,10 +1051,10 @@ body.active-home .home {
   height: 100%;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  -webkit-animation: rotateCube 16s linear infinite;
-          animation: rotateCube 16s linear infinite;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
+  -webkit-animation: rotateCube 16s linear infinite;
+          animation: rotateCube 16s linear infinite;
 }
 .random__face {
   position: absolute;
