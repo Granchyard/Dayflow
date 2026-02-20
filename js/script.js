@@ -304,6 +304,59 @@ class FormsValidation {
 
 const formsValidation = new FormsValidation();
 
+// ===== AUTH + STORAGE =====
+
+function isLocalStorageAvailable() {
+  try {
+    const testKey = "__test_localstorage__";
+    localStorage.setItem(testKey, "1");
+    localStorage.removeItem(testKey);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function getUsersArray() {
+  return JSON.parse(localStorage.getItem("users") || "[]");
+}
+
+function saveUsersArray(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
+function setAuth(username, remember) {
+  sessionStorage.removeItem(AUTH_KEY);
+  localStorage.removeItem(AUTH_KEY);
+
+  const payload = { username };
+  const storage = remember ? localStorage : sessionStorage;
+  storage.setItem(AUTH_KEY, JSON.stringify(payload));
+}
+
+function getAuth() {
+  return JSON.parse(
+    sessionStorage.getItem(AUTH_KEY) ||
+      localStorage.getItem(AUTH_KEY) ||
+      "null",
+  );
+}
+
+function clearAuth() {
+  sessionStorage.removeItem(AUTH_KEY);
+  localStorage.removeItem(AUTH_KEY);
+}
+
+function applyAuthUI() {
+  const auth = getAuth();
+  document.body.classList.toggle("logged-in", !!auth);
+
+  const el = document.querySelector(".header__person-menu-button-account-name");
+  if (!el) return;
+
+  el.textContent = auth?.username ? auth.username : "Account";
+}
+
 
 let playDeadlineId = null;
 
