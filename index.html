@@ -146,7 +146,78 @@
             </section>
           </div>
 
-          <div class="register__form-box"></div>
+          <div class="register__form-box">
+            <form
+              action="#"
+              class="register__form-enter"
+              method="post"
+              novalidate
+              data-js-form="enter"
+            >
+              <h3 class="register__form-title">Enter</h3>
+
+              <p class="register__form-input-block">
+                <input
+                  type="text"
+                  class="register__form-input enter-username"
+                  name="enter-username"
+                  placeholder="Username"
+                  required
+                  minlength="3"
+                  maxlength="16"
+                  aria-errormessage="enter-username-errors"
+                />
+
+                <span
+                  id="enter-username-errors"
+                  class="register__error-box"
+                  data-js-form-input-errors
+                ></span>
+              </p>
+
+              <p class="register__form-input-block">
+                <span class="register__pasword-block-passwort-wrapper">
+                  <input
+                    type="password"
+                    class="register__form-input form-password enter-password"
+                    name="enter-password"
+                    placeholder="Password"
+                    required
+                    minlength="8"
+                    maxlength="16"
+                    aria-errormessage="enter-password-errors"
+                  />
+
+                  <img
+                    src="/img/passVisibility/passEyeClose.svg"
+                    alt=""
+                    class="register__password-eye"
+                  />
+                </span>
+
+                <span
+                  id="enter-password-errors"
+                  class="register__error-box"
+                  data-js-form-input-errors
+                ></span>
+              </p>
+
+              <p class="register__password-save">
+                <label class="register__password-save-label">
+                  <input type="checkbox" id="rememberMe" />
+                  Stay signed in
+                </label>
+              </p>
+
+              <p>
+                <button class="register__form-btn form-btn-enter">Enter</button>
+              </p>
+
+              <p>
+                <a href="#" class="register__form-forgot">Reset password</a>
+              </p>
+            </form>
+          </div>
         </article>
 
         <aside class="sidebar">
