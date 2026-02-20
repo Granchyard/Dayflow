@@ -45,9 +45,31 @@ const registerConfirmPasswordInput = document.querySelector(
 const logoutBtn = document.querySelector(".person-menu-button-logout");
 
 let keyboardMode = false;
+let selectedAvatarId = null;
+let userWinStreak = 0;
+let selectedPlayer = 1;
 let storageWarned = false;
 
 const AUTH_KEY = "authUser";
+
+const BOT_NAME = "__BOT__";
+const BOT_AVATAR_KEY = "botAvatarId";
+const USER_AVATAR_KEY = "guestUserAvatarId";
+
+const BOT_AVATARS = [
+  "../img/black theme avatar/Robot avatar 3/BlackThRbAvatar 1.webp",
+  "../img/black theme avatar/Robot avatar 3/BlackThRbAvatar 2.webp",
+  "../img/black theme avatar/Robot avatar 3/BlackThRbAvatar 3.webp",
+];
+
+const USER_AVATARS = [
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 1.webp",
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 2.webp",
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 3.webp",
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 4.webp",
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 5.webp",
+  "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 6.webp",
+];
 
 const closeSidebar = () => {
   body.classList.remove("sidebar-open");
