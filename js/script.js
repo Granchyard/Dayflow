@@ -1128,29 +1128,80 @@ function playCubeAnimation() {
       }
 
       if (cubeResultPlayerOne !== null && cubeResultPlayerTwo !== null) {
-        if (cubeResultPlayerOne > cubeResultPlayerTwo) {
-          randomWinner.classList.add("show-winner");
-          randomWinnerName.textContent = "@Player1";
+  const leftName = String(
+    randomPlayerOne.dataset.pid || randomPlayerOne.textContent,
+  ).trim();
+  const rightName = String(
+    randomPlayerTwo.dataset.pid || randomPlayerTwo.textContent,
+  ).trim();
 
-          setTimeout(() => {
-            randomWinner.classList.remove("show-winner");
-          }, 10000);
-        } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
-          randomWinner.classList.add("show-winner");
-          randomWinnerName.textContent = "@Player2";
+  const dateText = getHistoryDate();
 
-          setTimeout(() => {
-            randomWinner.classList.remove("show-winner");
-          }, 10000);
-        } else {
-          randomWinner.classList.add("show-winner");
-          randomWinnerName.textContent = "Friendship";
+  if (cubeResultPlayerOne > cubeResultPlayerTwo) {
+    updateUserStreakAfterRound(1);
 
-          setTimeout(() => {
-            randomWinner.classList.remove("show-winner");
-          }, 10000);
-        }
-      }
+    randomWinner.classList.add("show-winner");
+
+    const winnerName = leftName;
+
+    pushHistoryToStorage({
+      ts: Date.now(),
+      date: dateText,
+      p1: leftName,
+      p2: rightName,
+      winner: winnerName,
+    });
+
+    renderHistoryFromStorage();
+    randomWinnerName.textContent = labelForWinner(winnerName);
+
+    setTimeout(() => {
+      randomWinner.classList.remove("show-winner");
+    }, 10000);
+  } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
+    updateUserStreakAfterRound(2);
+
+    randomWinner.classList.add("show-winner");
+
+    const winnerName = rightName;
+
+    pushHistoryToStorage({
+      ts: Date.now(),
+      date: dateText,
+      p1: leftName,
+      p2: rightName,
+      winner: winnerName,
+    });
+
+    renderHistoryFromStorage();
+    randomWinnerName.textContent = labelForWinner(winnerName);
+
+    setTimeout(() => {
+      randomWinner.classList.remove("show-winner");
+    }, 10000);
+  } else {
+    updateUserStreakAfterRound(null);
+
+    randomWinner.classList.add("show-winner");
+
+    const winnerName = "Friendship";
+
+    pushHistoryToStorage({
+      ts: Date.now(),
+      date: dateText,
+      p1: leftName,
+      p2: rightName,
+      winner: winnerName,
+    });
+
+    renderHistoryFromStorage();
+    randomWinnerName.textContent = "Friendship";
+
+    setTimeout(() => {
+      randomWinner.classList.remove("show-winner");
+    }, 10000);
+  }
+}
 
       randomWinner.addEventListener(
         "transitionend",
@@ -1172,6 +1223,7 @@ randomButtonStart?.addEventListener("click", () => {
   const onEnd = (e) => {
     if (e.target !== randomButtonStart || e.propertyName !== "opacity") return;
     randomButtonStart.classList.add("btn-gone");
+    assignSeats();
     showPlay();
     showQueue();
   };
