@@ -92,6 +92,53 @@ const toggleRegister = () => {
   body.classList.toggle("register-active");
 };
 
+function setButtonsAvatarMode() {
+  if (accountCancelButton) accountCancelButton.textContent = "Back";
+  if (accountSaveButton) accountSaveButton.textContent = "Choose";
+}
+
+function setButtonsDefaultMode() {
+  if (accountCancelButton) accountCancelButton.textContent = "Cancel";
+  if (accountSaveButton) accountSaveButton.textContent = "Save";
+}
+
+function closeAccount() {
+  body.classList.remove("account-active");
+  body.classList.remove("change-avatar");
+  setButtonsDefaultMode();
+}
+
+function closeChangeAvatar() {
+  body.classList.remove("change-avatar");
+  removeSelectedAvatarClass();
+  setButtonsDefaultMode();
+}
+
+function handleAccountBackOrClose() {
+  if (body.classList.contains("change-avatar")) {
+    closeChangeAvatar();
+    return true;
+  }
+
+  if (body.classList.contains("account-active")) {
+    closeAccount();
+    return true;
+  }
+
+  return false;
+}
+
+function removeSelectedAvatarClass() {
+  if (!avatarBox) return;
+
+  const selectedItems = avatarBox.querySelectorAll(
+    ".account__avatar-item.is-selected",
+  );
+
+  selectedItems.forEach((el) => el.classList.remove("is-selected"));
+  selectedAvatarId = null;
+}
+
 burgerButton?.addEventListener("click", () => {
   closeRegister();
   closePersonMenu();
