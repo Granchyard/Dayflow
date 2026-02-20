@@ -264,15 +264,32 @@ registerFormEnter?.addEventListener("submit", (e) => {
   }
 
   setAuth(username, rememberMeCheckbox.checked);
-  applyAuthUI();
+ensureUserAvatarSaved(username);
 
-  closeRegister();
-  formsValidation.clearForm(registerFormEnter);
+applyAuthUI();
+bestStreakVisibility();
+setStreakBestValue(getBestStreak());
+streakAndHistoryUnavailable();
+
+assignSeats();
+
+applyAccountAvatar();
+updateStreakUI();
+renderHistoryFromStorage();
+
+closeRegister();
+formsValidation.clearForm(registerFormEnter);
 });
 
 logoutBtn?.addEventListener("click", () => {
   clearAuth();
+
   applyAuthUI();
+  bestStreakVisibility();
+  setStreakBestValue(getBestStreak());
+  streakAndHistoryUnavailable();
+  assignSeats();
+  updateStreakUI();
   closePersonMenu();
 });
 
@@ -889,6 +906,7 @@ function setAuth(username, remember) {
   const payload = { username };
   const storage = remember ? localStorage : sessionStorage;
   storage.setItem(AUTH_KEY, JSON.stringify(payload));
+  loadStats();
 }
 
 function getAuth() {
@@ -923,12 +941,22 @@ function registerLocalStorage() {
   users.push({
     username: usernameRegister,
     password: passwordRegister,
+    avatarId: Math.floor(Math.random() * USER_AVATARS.length),
   });
 
   localStorage.setItem("users", JSON.stringify(users));
 
   setAuth(usernameRegister, rememberMeCheckbox.checked);
   applyAuthUI();
+  bestStreakVisibility();
+  setStreakBestValue(getBestStreak());
+  streakAndHistoryUnavailable();
+
+  assignSeats();
+
+  applyAccountAvatar();
+  updateStreakUI();
+  renderHistoryFromStorage();
   closeRegister();
   formsValidation.clearForm(registerFormRegister);
 }
