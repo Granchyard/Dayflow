@@ -1051,6 +1051,62 @@ body.active-home .home {
   font-weight: 500;
   color: #ffffff;
 }
+.register__form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  font-size: inherit;
+  font-family: "Exo 2", sans-serif;
+  background-color: rgba(7, 15, 35, 0.75);
+}
+.register__form-input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.register__form-input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.register__form-input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.register__form-input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.register__form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+.register__form-input:focus {
+  outline: none;
+  border-color: #1e88ff;
+  -webkit-box-shadow: 0 0 0 1px rgba(30, 136, 255, 0.4);
+          box-shadow: 0 0 0 1px rgba(30, 136, 255, 0.4);
+}
+.register__password-save-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+}
+.register__password-save-label, .register__password-save-label input {
+  cursor: pointer;
+}
+.register__password-save-label input {
+  width: 18px;
+  aspect-ratio: 1/1;
+}
+.register__form-btn {
+  cursor: pointer;
+  font-size: inherit;
+  background-color: rgb(0, 119, 255);
+  color: white;
+  padding: 10px 50px;
+}
+.register__form-forgot {
+  color: #ffffff;
+}
 .register__item {
   width: 50%;
 }
