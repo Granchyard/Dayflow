@@ -129,9 +129,8 @@
     border: 2px solid var(--c-cyan);
     background: rgb(var(--c-cyan-rgb) / 0.05);
     box-shadow: 0 0 20px rgb(var(--c-cyan-rgb) / 0.6);
-  }
 
-  &--front {
+    &--front {
     transform: translateZ(calc(a.$cube-size / 2));
   }
 
@@ -158,6 +157,7 @@
   &--back,
   &--bottom {
     box-shadow: none;
+  }
   }
 
   &__glow {
@@ -428,6 +428,48 @@
   &__history {
     @include a.glassy;
     grid-area: history;
+    display: flex;
+    min-height: 0;
+    position: relative;
+  }
+
+  &__history-log {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: a.rem(10);
+
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+
+    opacity: 0.85;
+  }
+
+  &__history-rows {
+    @include a.customScroll;
+    overflow: auto;
+  }
+
+  &__history-head,
+  &__history-row {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1.6fr)
+      minmax(0, 1.1fr)
+      minmax(0, 1.1fr);
+    column-gap: 0.6rem;
+    align-items: center;
+
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &__history-head > span,
+  &__history-row > span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
