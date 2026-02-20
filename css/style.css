@@ -450,12 +450,11 @@ body {
 }
 
 .container {
-  width: clamp(15.625rem, 90%, 90rem);
   min-height: 100svh;
   min-height: 100dvh;
   margin: 0 auto;
-  padding-inline: clamp(1rem, 0.5714285714rem + 2.1428571429vw, 2.5rem);
-  padding: 1.25rem;
+  width: clamp(15.625rem, 90%, 90rem);
+  padding: 1.25rem 0 1.25rem 0;
 }
 
 .header {
