@@ -472,6 +472,25 @@
     white-space: nowrap;
   }
 
+  &__streak-unavailable,
+  &__history-unavailable {
+    position: absolute;
+    inset: 0;
+    padding: a.rem(15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(5px) brightness(0.9) saturate(110%) contrast(95%);
+    transition: opacity 0.5s ease;
+  }
+
   &-players {
     @include a.clamp-size(width, 120, 220);
     min-height: a.rem(180);
@@ -649,6 +668,22 @@
     @include a.clamp-font(13, 18);
   }
 
+  .random__streak-main {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: a.rem(8);
+  }
+
+  .random__streak-meta {
+    align-items: center;
+  }
+
+  
+
+  .random__streak-player {
+    max-width: clamp(10rem, 60vw, 16rem);
+  }
+
   .random__winner-name {
     overflow-wrap: anywhere;
     word-break: normal;
@@ -660,6 +695,24 @@
   opacity: 0.85;
   visibility: visible;
   pointer-events: all;
+}
+
+.unavailable-active {
+  .random__streak-unavailable,
+  .random__history-unavailable {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .random__history-title,
+  .random__history-log,
+  .random__streak-title,
+  .random__streak-subtitle {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 .btn-hidden {

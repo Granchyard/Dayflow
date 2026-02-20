@@ -1435,6 +1435,27 @@ body.active-home .home {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.random__streak-unavailable, .random__history-unavailable {
+  position: absolute;
+  inset: 0;
+  padding: 0.9375rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(5px) brightness(0.9) saturate(110%) contrast(95%);
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
 .random-players {
   width: clamp(7.5rem, 5.7142857143rem + 8.9285714286vw, 13.75rem);
   min-height: 11.25rem;
@@ -1664,6 +1685,19 @@ body.active-home .home {
             justify-content: center;
     font-size: clamp(0.8125rem, 0.7232142857rem + 0.4464285714vw, 1.125rem);
   }
+  .random__streak-main {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 0.5rem;
+  }
+  .random__streak-meta {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .random__streak-player {
+    max-width: clamp(10rem, 60vw, 16rem);
+  }
   .random__winner-name {
     overflow-wrap: anywhere;
     word-break: normal;
@@ -1675,6 +1709,21 @@ body.active-home .home {
   opacity: 0.85;
   visibility: visible;
   pointer-events: all;
+}
+
+.unavailable-active .random__streak-unavailable,
+.unavailable-active .random__history-unavailable {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.unavailable-active .random__history-title,
+.unavailable-active .random__history-log,
+.unavailable-active .random__streak-title,
+.unavailable-active .random__streak-subtitle {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .btn-hidden {
