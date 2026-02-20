@@ -134,6 +134,59 @@
     flex-direction: column;
     gap: a.rem(8);
   }
+
+  &__item-button {
+    width: 100%;
+    height: a.rem(44);
+    padding: 0 a.rem(14);
+    border-radius: a.rem(12);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: a.rem(14);
+    font-weight: 550;
+    line-height: 1;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    transition:
+      background 0.14s ease,
+      border-color 0.14s ease,
+      transform 0.14s ease;
+  }
+
+  &__button-block {
+    margin-top: a.rem(8);
+
+    display: flex;
+    justify-content: center;
+    gap: a.rem(16);
+  }
+
+  &__button {
+    cursor: pointer;
+    flex: 1;
+
+    height: a.rem(44);
+    padding: 0 a.rem(16);
+
+    font-size: a.rem(15);
+    font-weight: 500;
+    color: #ffffff;
+
+    border-radius: a.rem(10);
+  }
+
+  &__save-button {
+    background-color: #57b758;
+  }
+
+  &__cancel-button {
+    background-color: rgb(0, 119, 255);
+  }
 }
 
 body.account-active .account {
