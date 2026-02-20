@@ -350,9 +350,78 @@ function attachPlayHandler() {
   randomButtonPlay.addEventListener("click", onPlayClick, { once: true });
 }
 
+// ===== ACCESSIBILITY / FOCUS =====
+
+function initKbdNav() {
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Tab") body.classList.add("kbd-nav");
+  });
+
+  window.addEventListener("pointerdown", () => {
+    body.classList.remove("kbd-nav");
+  });
+}
+
+function initHeaderFocusFix() {
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      const k = e.key;
+      if (typeof k !== "string") return;
+      if (k === "Tab" || k.startsWith("Arrow") || k === "Enter" || k === " ") {
+        keyboardMode = true;
+      }
+    },
+    true,
+  );
+
+  document.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (e.pointerType === "mouse") keyboardMode = false;
+    },
+    true,
+  );
+
+  if (header) {
+    header.addEventListener(
+      "mousedown",
+      (e) => {
+        if (keyboardMode) return;
+        if (e.button !== 0) return;
+        const btn = e.target.closest("button");
+        if (btn) e.preventDefault();
+      },
+      true,
+    );
+  }
+
+  document.addEventListener(
+    "pointerup",
+    (e) => {
+      if (keyboardMode) return;
+      if (e.pointerType !== "mouse") return;
+
+      const active = document.activeElement;
+      if (
+        active &&
+        header &&
+        header.contains(active) &&
+        active.tagName === "BUTTON"
+      ) {
+        active.blur();
+      }
+    },
+    true,
+  );
+}
+
 // ===== LISTENERS =====
 
 // disable zooming
+
+initKbdNav();
+initHeaderFocusFix();
 
 document.addEventListener(
   "touchmove",
