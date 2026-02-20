@@ -1,26 +1,5 @@
 "use strict";
 
-document.addEventListener(
-  "touchmove",
-  function (e) {
-    if (e.touches.length > 1) {
-      e.preventDefault();
-    }
-  },
-  { passive: false }
-);
-
-["gesturestart", "gesturechange", "gestureend"].forEach((type) =>
-  document.addEventListener(type, (e) => e.preventDefault(), { passive: false })
-);
-
-document.addEventListener(
-  "dblclick",
-  (e) => {
-    e.preventDefault();
-  },
-  { passive: false }
-);
 
 //sidebar
 
@@ -329,3 +308,31 @@ function attachPlayHandler() {
   randomButtonPlay.removeEventListener("click", onPlayClick);
   randomButtonPlay.addEventListener("click", onPlayClick, { once: true });
 }
+
+// ===== LISTENERS =====
+
+// disable zooming
+
+document.addEventListener(
+  "touchmove",
+  function (e) {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+    }
+  },
+  { passive: false },
+);
+
+["gesturestart", "gesturechange", "gestureend"].forEach((type) =>
+  document.addEventListener(type, (e) => e.preventDefault(), {
+    passive: false,
+  }),
+);
+
+document.addEventListener(
+  "dblclick",
+  (e) => {
+    e.preventDefault();
+  },
+  { passive: false },
+);
