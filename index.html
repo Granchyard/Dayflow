@@ -217,6 +217,99 @@
                 <a href="#" class="register__form-forgot">Reset password</a>
               </p>
             </form>
+
+            <form
+              action="#"
+              class="register__form-register"
+              method="post"
+              novalidate
+              data-js-form="register"
+            >
+              <h3 class="register__form-title">Register</h3>
+
+              <p class="register__form-input-block">
+                <input
+                  type="text"
+                  class="register__form-input register-username"
+                  name="register-username"
+                  placeholder="Username"
+                  required
+                  minlength="3"
+                  maxlength="16"
+                  pattern="[A-Za-z0-9._\-]{3,16}"
+                  title="3–16 Latin letters, digits, . _ or -"
+                  aria-errormessage="register-username-errors"
+                />
+
+                <span
+                  id="register-username-errors"
+                  class="register__error-box"
+                  data-js-form-input-errors
+                ></span>
+              </p>
+
+              <p class="register__form-input-block">
+                <span class="register__pasword-block-passwort-wrapper">
+                  <input
+                    type="password"
+                    class="register__form-input form-password register-password"
+                    name="register-password"
+                    placeholder="Password"
+                    required
+                    minlength="8"
+                    maxlength="16"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d]{8,16}"
+                    title="8–16 Latin letters and digits only, at least 1 uppercase, 1 lowercase and 1 digit."
+                    aria-errormessage="register-password-errors"
+                  />
+
+                  <img
+                    src="/img/passVisibility/passEyeClose.svg"
+                    alt=""
+                    class="register__password-eye"
+                  />
+                </span>
+
+                <span
+                  id="register-password-errors"
+                  class="register__error-box"
+                  data-js-form-input-errors
+                ></span>
+              </p>
+
+              <p class="register__form-input-block">
+                <span class="register__pasword-block-passwort-wrapper">
+                  <input
+                    type="password"
+                    class="register__form-input form-password register-confirm-password"
+                    name="register-confirm-password"
+                    placeholder="Confirm password"
+                    required
+                    minlength="8"
+                    maxlength="16"
+                    aria-errormessage="register-confirm-password-errors"
+                  />
+
+                  <img
+                    src="/img/passVisibility/passEyeClose.svg"
+                    alt=""
+                    class="register__password-eye"
+                  />
+                </span>
+
+                <span
+                  id="register-confirm-password-errors"
+                  class="register__error-box"
+                  data-js-form-input-errors
+                ></span>
+              </p>
+
+              <p>
+                <button class="register__form-btn form-btn-register">
+                  Register
+                </button>
+              </p>
+            </form>
           </div>
         </article>
 
