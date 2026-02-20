@@ -1327,7 +1327,18 @@ document.addEventListener("DOMContentLoaded", () => {
   body.classList.remove("active-random");
 
   applyAuthUI();
+
+  bestStreakVisibility();
+  streakAndHistoryUnavailable();
+  loadStats();
+  renderHistoryFromStorage();
+  getGuestUserAvatarId();
+  assignSeats();
+  updateStreakUI();
+  updateHistoryHeaderPadding();
 });
+
+window.addEventListener("resize", updateHistoryHeaderPadding);
 
 function attachPlayHandler() {
   if (!randomButtonPlay) return;
