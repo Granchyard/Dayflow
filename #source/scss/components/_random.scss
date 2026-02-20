@@ -101,13 +101,18 @@
     grid-area: player1;
   }
 
+  &__player2 {
+    grid-area: player2;
+  }
+
   &__main-block {
+    grid-area: main;
+    align-self: end;
+
     min-height: clamp(a.rem(200), 45vw, a.rem(250));
     display: flex;
     align-items: center;
     justify-content: center;
-    grid-area: main;
-    align-self: end;
   }
 
   &__cube-container {
@@ -202,8 +207,9 @@
   &__holo-number {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
     top: 0;
+    transform: translateX(-50%);
+
     font-size: 4rem;
     font-weight: bold;
     color: var(--c-cyan);
@@ -226,10 +232,6 @@
     box-shadow: 0 0 10px var(--c-cyan);
     opacity: 0.8;
     animation: energy-move 3.5s linear forwards;
-  }
-
-  &__player2 {
-    grid-area: player2;
   }
 
   &__streak {

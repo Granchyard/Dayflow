@@ -1024,7 +1024,12 @@ body.active-home .home {
 .random__player1 {
   grid-area: player1;
 }
+.random__player2 {
+  grid-area: player2;
+}
 .random__main-block {
+  grid-area: main;
+  align-self: end;
   min-height: clamp(12.5rem, 45vw, 15.625rem);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1035,8 +1040,6 @@ body.active-home .home {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  grid-area: main;
-  align-self: end;
 }
 .random__cube-container {
   position: relative;
@@ -1129,10 +1132,10 @@ body.active-home .home {
 .random__holo-number {
   position: absolute;
   left: 50%;
+  top: 0;
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  top: 0;
   font-size: 4rem;
   font-weight: bold;
   color: var(--c-cyan);
@@ -1151,9 +1154,6 @@ body.active-home .home {
   opacity: 0.8;
   -webkit-animation: energy-move 3.5s linear forwards;
           animation: energy-move 3.5s linear forwards;
-}
-.random__player2 {
-  grid-area: player2;
 }
 .random__streak {
   background: #10223f;
