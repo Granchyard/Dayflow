@@ -106,12 +106,14 @@ function restartGame(reason = "") {
   cubeResultPlayerTwo = null;
   showQueue._doneOnce = false;
 
-  randomPlayer1Count.textContent = "0";
-  randomPlayer2Count.textContent = "0";
+  if (randomPlayer1Count) randomPlayer1Count.textContent = "0";
+  if (randomPlayer2Count) randomPlayer2Count.textContent = "0";
 
-  randomButtonPlay.classList.add("btn-hidden", "btn-gone");
+  if (randomButtonPlay)
+    randomButtonPlay.classList.add("btn-hidden", "btn-gone");
 
-  randomButtonStart.classList.remove("btn-hidden", "btn-gone");
+  if (randomButtonStart)
+    randomButtonStart.classList.remove("btn-hidden", "btn-gone");
 
   attachPlayHandler();
 }
@@ -281,7 +283,7 @@ function playCubeAnimation() {
 }
 
 attachPlayHandler();
-randomButtonStart.addEventListener("click", () => {
+randomButtonStart?.addEventListener("click", () => {
   if (randomWinner.classList.contains("show-winner")) {
     randomWinner.classList.remove("show-winner");
   }
