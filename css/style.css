@@ -914,9 +914,13 @@ body.sidebar-open .sidebar {
   transition: opacity 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-body.sidebar-open .overlay {
+body.sidebar-open .overlay,
+body.register-active .overlay,
+body.person-menu-open .overlay,
+body.account-active .overlay {
   opacity: 1;
   pointer-events: auto;
+  z-index: 99;
 }
 
 .home {
