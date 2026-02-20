@@ -649,6 +649,103 @@ function bestStreakVisibility() {
   randomStreakBestBlock.classList.toggle("streak-best-block-active", !!auth);
 }
 
+function getUserStats() {
+  const auth = getAuth();
+  if (!auth) return null;
+
+  const username = auth.username;
+  const stats = JSON.parse(localStorage.getItem("stats") || "{}");
+
+  if (!stats[username]) {
+    stats[username] = { bestStreak: 0, history: [] };
+  }
+
+  return { stats, username };
+}
+
+function pushHistoryToStorage({ ts, date, p1, p2, winner }) {
+  const pack = getUserStats();
+  if (!pack) return;
+
+  const { stats, username } = pack;
+
+  stats[username].history.unshift({ ts, date, p1, p2, winner });
+  stats[username].history = stats[username].history.slice(0, 50);
+
+  localStorage.setItem("stats", JSON.stringify(stats));
+}
+
+function renderHistoryFromStorage() {
+  const pack = getUserStats();
+  if (!pack || !historyList) return;
+
+  const { stats, username } = pack;
+  const rows = stats[username].history || [];
+
+  historyList.textContent = "";
+
+  for (const r of rows) {
+    const matchText = `${labelForPlayer(r.p1)} × ${labelForPlayer(r.p2)}`;
+    const winnerText = labelForWinner(r.winner);
+
+    addHistoryRow(r.date, matchText, winnerText);
+  }
+
+  updateHistoryHeaderPadding();
+}
+
+function getHistoryDate() {
+  const dt = new Date();
+
+  return (
+    new Intl.DateTimeFormat("en-GB", {
+      day: "2-digit",
+      month: "short",
+    })
+      .format(dt)
+      .replace(",", "") +
+    " • " +
+    new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).format(dt)
+  );
+}
+
+function addHistoryRow(dateText, matchText, winnerText) {
+  if (!historyList) return;
+
+  const li = document.createElement("li");
+  li.classList.add("random__history-row");
+
+  const date = document.createElement("span");
+  date.classList.add("random__history-date");
+  date.textContent = dateText;
+
+  const match = document.createElement("span");
+  match.classList.add("random__history-match");
+  match.textContent = matchText;
+
+  const winner = document.createElement("span");
+  winner.classList.add("random__history-winner");
+  winner.textContent = winnerText;
+
+  li.append(date, match, winner);
+  historyList.append(li);
+}
+
+function updateHistoryHeaderPadding() {
+  const rows = document.querySelector(".random__history-rows");
+  const head = document.querySelector(".random__history-head");
+  if (!rows || !head) return;
+
+  const hasScroll = rows.scrollHeight > rows.clientHeight;
+  const sbw = hasScroll ? rows.offsetWidth - rows.clientWidth : 0;
+
+  head.style.setProperty("--sbw", sbw + "px");
+}
+
 // ===== AUTH + STORAGE =====
 
 function isLocalStorageAvailable() {
