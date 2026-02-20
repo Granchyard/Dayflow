@@ -1168,6 +1168,16 @@ body.change-avatar .account__menu {
   overflow: hidden;
 }
 
+.account__avatar-item.is-selected {
+  -webkit-transform: scale(1.04);
+      -ms-transform: scale(1.04);
+          transform: scale(1.04);
+  -webkit-box-shadow: 0 0 18px rgba(0, 234, 255, 0.45);
+          box-shadow: 0 0 18px rgba(0, 234, 255, 0.45);
+  -webkit-filter: brightness(1.03);
+          filter: brightness(1.03);
+}
+
 .home {
   grid-row: 1/2;
   grid-column: 1/2;

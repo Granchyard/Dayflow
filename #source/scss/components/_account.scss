@@ -239,3 +239,9 @@ body.change-avatar {
     overflow: hidden;
   }
 }
+
+.account__avatar-item.is-selected {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(0, 234, 255, 0.45);
+  filter: brightness(1.03);
+}
