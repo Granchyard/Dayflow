@@ -139,6 +139,110 @@ passwordWrapper.forEach((block) => {
   });
 });
 
+registerFormEnter?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  enterUsernameInput.setCustomValidity("");
+  enterPasswordInput.setCustomValidity("");
+
+  const requiredInputs = [...registerFormEnter.elements].filter(
+    (e) => e.required,
+  );
+
+  let firstInvalidInput = null;
+
+  requiredInputs.forEach((input) => {
+    const isValid = formsValidation.validateInput(input);
+    if (!isValid && !firstInvalidInput) {
+      firstInvalidInput = input;
+    }
+  });
+
+  if (!registerFormEnter.checkValidity()) {
+    if (firstInvalidInput) firstInvalidInput.focus();
+    return;
+  }
+
+  const username = enterUsernameInput.value.trim();
+  const password = enterPasswordInput.value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const user = users.find((u) => u.username === username);
+
+  if (!user) {
+    enterUsernameInput.setCustomValidity("User not found");
+    formsValidation.validateInput(enterUsernameInput);
+    enterUsernameInput.focus();
+    return;
+  }
+
+  if (user.password !== password) {
+    enterPasswordInput.setCustomValidity("Wrong password");
+    formsValidation.validateInput(enterPasswordInput);
+    enterPasswordInput.focus();
+    return;
+  }
+
+  setAuth(username, rememberMeCheckbox.checked);
+  applyAuthUI();
+
+  closeRegister();
+  formsValidation.clearForm(registerFormEnter);
+});
+
+logoutBtn?.addEventListener("click", () => {
+  clearAuth();
+  applyAuthUI();
+  closePersonMenu();
+});
+
+registerFormRegister?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  registerUsernameInput.setCustomValidity("");
+
+  const usernameRegister = registerUsernameInput.value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const isUserExist = users.some((user) => user.username === usernameRegister);
+
+  if (isUserExist) {
+    registerUsernameInput.setCustomValidity("This username is already taken");
+  }
+
+  const requiredInputs = [...registerFormRegister.elements].filter(
+    (el) => el.required,
+  );
+
+  let firstInvalidInput = null;
+
+  requiredInputs.forEach((input) => {
+    const isValid = formsValidation.validateInput(input);
+    if (!isValid && !firstInvalidInput) {
+      firstInvalidInput = input;
+    }
+  });
+
+  const isFormValid = registerFormRegister.checkValidity();
+
+  if (!isFormValid) {
+    if (firstInvalidInput) {
+      firstInvalidInput.focus();
+    }
+    return;
+  }
+
+  if (!isLocalStorageAvailable()) {
+    if (!storageWarned) {
+      alert("LocalStorage is not available in this browser mode.");
+      storageWarned = true;
+    }
+    return;
+  }
+
+  registerLocalStorage();
+});
+
 const randomPlayer1 = document.querySelector(".random__player1");
 const randomPlayer2 = document.querySelector(".random__player2");
 
@@ -357,6 +461,24 @@ function applyAuthUI() {
   el.textContent = auth?.username ? auth.username : "Account";
 }
 
+function registerLocalStorage() {
+  const usernameRegister = registerUsernameInput.value.trim();
+  const passwordRegister = registerPasswordInput.value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  users.push({
+    username: usernameRegister,
+    password: passwordRegister,
+  });
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  setAuth(usernameRegister, rememberMeCheckbox.checked);
+  applyAuthUI();
+  closeRegister();
+  formsValidation.clearForm(registerFormRegister);
+}
 
 let playDeadlineId = null;
 
