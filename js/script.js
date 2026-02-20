@@ -746,6 +746,121 @@ function updateHistoryHeaderPadding() {
   head.style.setProperty("--sbw", sbw + "px");
 }
 
+// ===== AVATARS / SEATS =====
+
+function getBotAvatarId() {
+  let id = sessionStorage.getItem(BOT_AVATAR_KEY);
+  if (id === null) {
+    id = String(Math.floor(Math.random() * 3));
+    sessionStorage.setItem(BOT_AVATAR_KEY, id);
+  }
+  return Number(id);
+}
+
+function getGuestUserAvatarId() {
+  let id = sessionStorage.getItem(USER_AVATAR_KEY);
+  if (id === null) {
+    id = String(Math.floor(Math.random() * 6));
+    sessionStorage.setItem(USER_AVATAR_KEY, id);
+  }
+  return Number(id);
+}
+
+function ensureUserAvatarSaved(username) {
+  const users = getUsersArray();
+  const idx = users.findIndex((u) => u.username === username);
+  if (idx === -1) return;
+
+  if (users[idx].avatarId === undefined || users[idx].avatarId === null) {
+    users[idx].avatarId = Math.floor(Math.random() * USER_AVATARS.length);
+    saveUsersArray(users);
+  }
+}
+
+function getCurrentUserAvatarId() {
+  const auth = getAuth();
+
+  if (!auth || !auth.username) return getGuestUserAvatarId();
+
+  const users = getUsersArray();
+  const u = users.find((x) => x.username === auth.username);
+
+  if (!u) return getGuestUserAvatarId();
+
+  if (u.avatarId === undefined || u.avatarId === null) {
+    u.avatarId = getGuestUserAvatarId();
+    saveUsersArray(users);
+  }
+
+  return Number(u.avatarId);
+}
+
+function applyAvatars() {
+  const leftName = randomPlayerOne.textContent.trim();
+  const rightName = randomPlayerTwo.textContent.trim();
+
+  const leftImg = document.querySelector(".random__player1-avatar img");
+  const rightImg = document.querySelector(".random__player2-avatar img");
+  if (!leftImg || !rightImg) return;
+
+  const botSrc = BOT_AVATARS[getBotAvatarId()];
+  const userSrc = USER_AVATARS[getCurrentUserAvatarId()];
+
+  if (leftName === "Bot") {
+    leftImg.src = botSrc;
+    rightImg.src = userSrc;
+  } else if (rightName === "Bot") {
+    rightImg.src = botSrc;
+    leftImg.src = userSrc;
+  }
+}
+
+function applyAccountAvatar() {
+  const img = document.querySelector(".account__avatar-img");
+  if (!img) return;
+
+  const id = getCurrentUserAvatarId();
+  img.src = USER_AVATARS[id];
+  img.alt = "User avatar";
+}
+
+function saveSelectedAvatarId(id) {
+  const auth = getAuth();
+  if (!auth) return;
+
+  const users = getUsersArray();
+  const idx = users.findIndex((u) => u.username === auth.username);
+  if (idx === -1) return;
+
+  users[idx].avatarId = id;
+  saveUsersArray(users);
+}
+
+function assignSeats() {
+  const auth = getAuth();
+  const userName = auth?.username ?? "Player";
+
+  selectedPlayer = Math.random() > 0.5 ? 1 : 2;
+
+  if (selectedPlayer === 1) {
+    randomPlayerOne.textContent = userName;
+    randomPlayerOne.dataset.pid = userName;
+  } else {
+    randomPlayerOne.textContent = "Bot";
+    randomPlayerOne.dataset.pid = BOT_NAME;
+  }
+
+  if (selectedPlayer === 2) {
+    randomPlayerTwo.textContent = userName;
+    randomPlayerTwo.dataset.pid = userName;
+  } else {
+    randomPlayerTwo.textContent = "Bot";
+    randomPlayerTwo.dataset.pid = BOT_NAME;
+  }
+
+  applyAvatars();
+}
+
 // ===== AUTH + STORAGE =====
 
 function isLocalStorageAvailable() {
