@@ -983,6 +983,74 @@ body.active-home .home {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.12)), to(rgba(255, 255, 255, 0.05)));
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
 }
+.register__form-box {
+  background: #10223f;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
+          box-shadow: 0 0 20px rgba(0, 200, 255, 0.15);
+  border-radius: 1.5625rem;
+  overflow: hidden;
+  height: 100%;
+  width: 50%;
+  -webkit-box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+  z-index: 107;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.register__form-enter, .register__form-register {
+  width: 100%;
+  padding: 50px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  position: absolute;
+  left: 0;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  transition: -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+}
+.register__form-enter {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition-delay: 0.25s;
+          transition-delay: 0.25s;
+}
+.register__form-register {
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+.register__form-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+}
 .register__item {
   width: 50%;
 }
@@ -992,6 +1060,28 @@ body.register-active .register {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+}
+
+.register__form-box.active-form {
+  -webkit-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.register__form-box.active-form .register__form-enter {
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+
+.register__form-box.active-form .register__form-register {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition-delay: 0.25s;
+          transition-delay: 0.25s;
 }
 
 .random {
