@@ -243,6 +243,24 @@
     min-height: 0;
   }
 
+  &__streak-title {
+    @include a.clamp-font(14, 20);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  &__streak-subtitle {
+    display: flex;
+    align-items: center; // чтобы блок не "висел" сверху
+    min-height: 0;
+    overflow: visible;
+
+    &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.18);
+      outline-offset: 2px;
+    }
+  }
+
   &__streak-main {
     width: 100%;
     display: grid;
@@ -265,12 +283,24 @@
     gap: a.rem(4);
   }
 
+  &__streak-playerline {
+    font-weight: 700;
+    @include a.clamp-font(14, 18);
+    opacity: 0.95;
+  }
+
   &__streak-player {
     display: inline-block;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  &__streak-caption {
+    @include a.clamp-font(12, 16);
+    opacity: 0.75;
+    line-height: 1.15;
   }
 
   &__streak-count {
@@ -624,14 +654,6 @@
       opacity 0.3s ease,
       visibility 0s linear 0.3s;
   }
-}
-
-.random-players-name,
-.random__history-title,
-.random__streak-title {
-  @include a.clamp-font(14, 20);
-  font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
 @media (max-width: 54em) {
