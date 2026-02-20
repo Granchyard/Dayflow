@@ -722,6 +722,8 @@ async function onPlayClick() {
 document.addEventListener("DOMContentLoaded", () => {
   body.classList.add("active-home");
   body.classList.remove("active-random");
+
+  applyAuthUI();
 });
 
 function attachPlayHandler() {
