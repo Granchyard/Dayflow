@@ -4,6 +4,17 @@
   display: flex;
   flex: 1;
 
+  &__winner,
+  &__winner-text,
+  &__streak-main,
+  &__streak-meta,
+  &__history-log,
+  &__history-rows,
+  &__history-head,
+  &__history-row {
+    min-width: 0;
+  }
+
   &__container {
     display: grid;
     flex: 1;
@@ -12,7 +23,7 @@
       "winner   winner   winner"
       "player1  main     player2"
       "streak   button   history";
-    grid-template-columns: 1fr minmax(a.rem(280), 1.5fr) 1fr;
+    grid-template-columns: 0.5fr minmax(240px, 0.5fr) 0.5fr;
     grid-template-rows: minmax(a.rem(40), a.rem(50)) auto minmax(
         a.rem(150),
         a.rem(200)
