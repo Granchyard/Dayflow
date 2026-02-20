@@ -206,6 +206,64 @@ headerPerson?.addEventListener("click", () => {
   }
 });
 
+accountMenu?.addEventListener("click", () => {
+  closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
+  applyAccountAvatar();
+  setButtonsDefaultMode();
+
+  if (!body.classList.contains("account-active")) {
+    body.classList.add("account-active");
+  }
+});
+
+accountCancelButton?.addEventListener("click", () => {
+  handleAccountBackOrClose();
+});
+
+if (avatarBox) {
+  avatarBox.addEventListener("click", (e) => {
+    const item = e.target.closest(".account__avatar-item");
+    if (!item) return;
+
+    const items = [...avatarBox.querySelectorAll(".account__avatar-item")];
+    const id = items.indexOf(item);
+
+    const already = item.classList.contains("is-selected");
+
+    items.forEach((el) => el.classList.remove("is-selected"));
+
+    if (already) {
+      selectedAvatarId = null;
+      return;
+    }
+
+    item.classList.add("is-selected");
+    selectedAvatarId = id;
+  });
+}
+
+accountAvatarImgBlock?.addEventListener("click", () => {
+  body.classList.add("change-avatar");
+  setButtonsAvatarMode();
+});
+
+accountSaveButton?.addEventListener("click", () => {
+  if (!body.classList.contains("change-avatar")) {
+    closeAccount();
+    return;
+  }
+
+  if (selectedAvatarId == null) return;
+
+  saveSelectedAvatarId(selectedAvatarId);
+  applyAccountAvatar();
+  applyAvatars();
+  closeChangeAvatar();
+});
+
 signUpButton?.addEventListener("click", () => {
   formBox.classList.add("active-form");
   formsValidation.clearForm(registerFormEnter);
