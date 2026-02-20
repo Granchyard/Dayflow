@@ -1215,6 +1215,47 @@ body.active-home .home {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.random__streak-count {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: clamp(1.75rem, 3.2vw, 2.875rem);
+  background: -webkit-gradient(linear, left top, right top, from(#ffcc00), to(var(--c-magenta)));
+  background: linear-gradient(90deg, #ffcc00, var(--c-magenta));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 12px rgba(255, 204, 0, 0.7), 0 0 20px rgb(var(--c-magenta-rgb)/0.55);
+}
+.random__streak-best {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -ms-flex-item-align: end;
+      align-self: end;
+  padding-top: 0.5625rem;
+  padding-right: 0.3125rem;
+  font-size: clamp(0.875rem, 0.7678571429rem + 0.5357142857vw, 1.25rem);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.random__streak-best::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
 .random__button-block {
   width: 9.375rem;
   height: 3.125rem;
@@ -1527,6 +1568,12 @@ body.active-home .home {
         hyphens: manual;
   }
 }
+.streak-best-block-active {
+  opacity: 0.85;
+  visibility: visible;
+  pointer-events: all;
+}
+
 .btn-hidden {
   opacity: 0;
   pointer-events: none;
