@@ -101,6 +101,44 @@ homeButton?.addEventListener("click", () => {
   body.classList.remove("active-random");
 });
 
+headerPerson?.addEventListener("click", () => {
+  closeSidebar();
+
+  if (getAuth()) {
+    body.classList.toggle("person-menu-open");
+  } else {
+    toggleRegister();
+    formBox.classList.remove("active-form");
+    formsValidation.clearForm(registerFormEnter);
+    formsValidation.clearForm(registerFormRegister);
+  }
+});
+
+signUpButton?.addEventListener("click", () => {
+  formBox.classList.add("active-form");
+  formsValidation.clearForm(registerFormEnter);
+});
+
+signInButton?.addEventListener("click", () => {
+  formBox.classList.remove("active-form");
+  formsValidation.clearForm(registerFormRegister);
+});
+
+passwordWrapper.forEach((block) => {
+  const input = block.querySelector(".form-password");
+  const eyeIcon = block.querySelector(".register__password-eye");
+
+  if (!input || !eyeIcon) return;
+  eyeIcon.addEventListener("click", () => {
+    const isPassword = input.type === "password";
+
+    input.type = isPassword ? "text" : "password";
+    eyeIcon.src = isPassword
+      ? "/img/passVisibility/passEye.svg"
+      : "/img/passVisibility/passEyeClose.svg";
+  });
+});
+
 const randomPlayer1 = document.querySelector(".random__player1");
 const randomPlayer2 = document.querySelector(".random__player2");
 
