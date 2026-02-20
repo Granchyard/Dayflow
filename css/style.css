@@ -971,7 +971,6 @@ body.active-home .home {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-width: 0;
   overflow: hidden;
   background: transparent;
   border: 2px solid rgb(var(--c-magenta-rgb)/0.6);
@@ -1383,10 +1382,10 @@ body.active-home .home {
   background: #0a0f1c;
   -webkit-box-shadow: 0 0 10px var(--c-cyan), 0 0 20px var(--c-cyan) inset;
           box-shadow: 0 0 10px var(--c-cyan), 0 0 20px var(--c-cyan) inset;
-  -webkit-transition: opacity 0.3s ease, opacity 0.15s ease, -webkit-transform 0.15s ease;
-  transition: opacity 0.3s ease, opacity 0.15s ease, -webkit-transform 0.15s ease;
-  transition: opacity 0.3s ease, transform 0.15s ease, opacity 0.15s ease;
-  transition: opacity 0.3s ease, transform 0.15s ease, opacity 0.15s ease, -webkit-transform 0.15s ease;
+  -webkit-transition: opacity 0.15s ease, -webkit-transform 0.15s ease;
+  transition: opacity 0.15s ease, -webkit-transform 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease, -webkit-transform 0.15s ease;
 }
 .random__button-play:hover {
   -webkit-transform: translateY(-1px) scale(1.01);
@@ -1397,10 +1396,6 @@ body.active-home .home {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
-}
-.random__button-play:focus-visible {
-  outline: 2px solid var(--c-cyan);
-  outline-offset: 2px;
 }
 .random__history {
   background: #10223f;
@@ -1492,6 +1487,9 @@ body.active-home .home {
   width: 100%;
   max-width: 100%;
 }
+.random__history-row {
+  font-size: clamp(0.75rem, 0.7142857143rem + 0.1785714286vw, 0.875rem);
+}
 .random__history-head > span, .random__history-row > span {
   min-width: 0;
   overflow: hidden;
@@ -1518,6 +1516,10 @@ body.active-home .home {
   backdrop-filter: blur(5px) brightness(0.9) saturate(110%) contrast(95%);
   -webkit-transition: opacity 0.5s ease;
   transition: opacity 0.5s ease;
+}
+.random__streak-unavailable p, .random__history-unavailable p {
+  text-align: center;
+  font-size: clamp(0.875rem, 0.7678571429rem + 0.5357142857vw, 1.25rem);
 }
 .random-players {
   width: clamp(7.5rem, 5.7142857143rem + 8.9285714286vw, 13.75rem);

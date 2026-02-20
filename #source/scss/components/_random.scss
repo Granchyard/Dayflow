@@ -44,7 +44,7 @@
     border-radius: a.rem(14);
     display: flex;
     align-items: center;
-    min-width: 0;
+
     overflow: hidden;
     background: transparent;
     border: 2px solid rgb(var(--c-magenta-rgb) / 0.6);
@@ -452,7 +452,6 @@
       0 0 10px var(--c-cyan),
       0 0 20px var(--c-cyan) inset;
     transition:
-      opacity 0.3s ease,
       transform 0.15s ease,
       opacity 0.15s ease;
 
@@ -463,11 +462,6 @@
     &:active {
       transform: translateY(0);
     }
-  }
-
-  &__button-play:focus-visible {
-    outline: 2px solid var(--c-cyan);
-    outline-offset: 2px;
   }
 
   &__history {
@@ -536,6 +530,10 @@
     max-width: 100%;
   }
 
+  &__history-row {
+    @include a.clamp-font(12, 14);
+  }
+
   &__history-head > span,
   &__history-row > span {
     min-width: 0;
@@ -561,6 +559,11 @@
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(5px) brightness(0.9) saturate(110%) contrast(95%);
     transition: opacity 0.5s ease;
+
+    p {
+      text-align: center;
+      @include a.clamp-font(14, 20);
+    }
   }
 
   &-players {
