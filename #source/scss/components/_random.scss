@@ -510,6 +510,28 @@
     min-width: 0;
   }
 
+  &-players-container {
+    flex: 1;
+    padding: a.rem(15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-width: 0;
+  }
+
+  &-players-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include a.clamp-size(gap, 8, 15);
+
+    width: 100%;
+    min-width: 0;
+  }
+
   &-players-avatar {
     @include a.clamp-size(width, 70, 90);
     border-radius: 50%;
@@ -542,69 +564,39 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-}
 
-.random-players {
-  @include a.clamp-size(width, 120, 220);
-  min-height: a.rem(180);
-  @include a.glassy;
-  display: flex;
-  justify-self: center;
-}
-.random-players-container {
-  flex: 1;
-  padding: a.rem(15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-.random-players-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @include a.clamp-size(gap, 8, 15);
-}
+  &-players-count {
+    font-family: a.$second-family;
+    font-weight: 700;
+    max-width: 100%;
+    text-align: center;
+    @include a.clamp-font(14, 20);
+    text-transform: uppercase;
+    color: var(--c-cyan);
+    letter-spacing: 1px;
+    padding: a.rem(4);
+  }
 
-.random-players-avatar {
-  @include a.clamp-size(width, 60, 70);
-  border-radius: 50%;
-  aspect-ratio: 1/1;
-  background-color: red;
-}
-.random-players-name {
-  text-align: center;
-}
+  &-players-ready {
+    font-family: a.$second-family;
+    font-weight: 700;
+    max-width: 100%;
+    text-align: center;
+    @include a.clamp-font(14, 20);
+    text-transform: uppercase;
+    color: var(--c-cyan);
+    text-shadow: 0 0 12px var(--c-cyan);
+    letter-spacing: 1px;
 
-.random-players-count {
-  font-family: a.$second-family;
-  font-weight: 700;
-  max-width: 100%;
-  text-align: center;
-  @include a.clamp-font(14, 20);
-  text-transform: uppercase;
-  color: var(--c-cyan);
-  letter-spacing: 1px;
-  padding: a.rem(4);
-}
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
 
-.random-players-ready {
-  font-family: a.$second-family;
-  font-weight: 700;
-  max-width: 100%;
-  text-align: center;
-  @include a.clamp-font(14, 20);
-  text-transform: uppercase;
-  color: var(--c-cyan);
-  text-shadow: 0 0 12px var(--c-cyan);
-  letter-spacing: 1px;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  user-select: none;
-  transition:
-    opacity 0.3s ease,
-    visibility 0s linear 0.3s;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
 }
 
 .random__history-log,
