@@ -119,10 +119,9 @@ $hl-ease: ease;
     &::after {
       bottom: 14px;
     }
-
   }
 
-    &__home::before,
+  &__home::before,
   &__menu-burger::before,
   &__item::before {
     @include hl-layer;
@@ -160,7 +159,7 @@ $hl-ease: ease;
     gap: a.rem(6);
   }
 
-   &__item {
+  &__item {
     &::before {
       transition:
         opacity $hl-dur $hl-ease,
@@ -175,7 +174,6 @@ $hl-ease: ease;
       display: grid;
       place-items: center;
     }
-  
   }
 
   .icon-language,
@@ -254,10 +252,10 @@ $hl-ease: ease;
     display: flex;
     justify-content: flex-start;
 
-    height: 36px;
+    height: a.rem(36);
     padding: 0 a.rem(12);
     align-items: center;
-    gap: 10px;
+    gap: a.rem(10);
 
     span {
       display: block;
@@ -268,111 +266,96 @@ $hl-ease: ease;
 
   &__person-menu-button-img-block {
     display: flex;
-    width: 18px;
-    height: 18px;
+    width: a.rem(30);
+    height: a.rem(30);
   }
 
   &__person-menu-button-theme-span-container {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: a.rem(5);
   }
 
   &__person-menu-button-theme-span-color {
     color: #4dd2ff;
     text-shadow: 0 0 6px rgba(0, 180, 255, 0.45);
   }
+}
 
-  // ===== BODY STATE STYLES (scoped to header) =====
-  body:is(.register-active, .person-menu-open) &__item.item-person::before,
-  body.sidebar-open &__menu-burger::before,
-  body.active-home &__home::before {
-    opacity: 1;
+// ===== BODY STATE STYLES (scoped to header) =====
+body:is(.register-active, .person-menu-open) .header__item.item-person::before,
+body.sidebar-open .header__menu-burger::before,
+body.active-home .header__home::before {
+  opacity: 1;
+  background: linear-gradient(to bottom, var(--hl1-active), var(--hl2-active));
+  border-color: var(--hl-border-active);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+body.person-menu-open .header__person-profile {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+body.kbd-nav .header__item:focus-within::before,
+body.kbd-nav .header__home:focus-within::before,
+body.kbd-nav .header__menu-burger:focus-within::before {
+  opacity: 1;
+  background: linear-gradient(to bottom, var(--hl1-hover), var(--hl2-hover));
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+body.kbd-nav .header button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.18);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .header__person-menu-button:is(:hover, :focus-visible) {
     background: linear-gradient(
-      to bottom,
-      var(--hl1-active),
-      var(--hl2-active)
+      135deg,
+      rgba(0, 200, 255, 0.15),
+      rgba(0, 120, 255, 0.25)
     );
-    border-color: var(--hl-border-active);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 2px 10px rgba(0, 180, 255, 0.35);
+    color: #4dd2ff;
+    text-shadow: 0 0 6px rgba(0, 180, 255, 0.6);
+    outline: none;
   }
+}
 
-  body.person-menu-open &__person-profile {
+@media (hover: hover) and (pointer: fine) {
+  .header__home:hover::before,
+  .header__menu-burger:hover::before,
+  .header__item:hover::before {
     opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+    background: linear-gradient(to bottom, var(--hl1-hover), var(--hl2-hover));
+    border-color: var(--hl-border-hover);
   }
 
-  body.kbd-nav &__item:focus-within::before,
-  body.kbd-nav &__home:focus-within::before,
-  body.kbd-nav &__menu-burger:focus-within::before {
+  .header__burger-button:hover span,
+  .header__burger-button:hover::before,
+  .header__burger-button:hover::after {
+    filter: drop-shadow(0 0 6px rgba(0, 234, 255, 0.5));
+  }
+}
+
+/* ===== Mobile tap-feedback  ===== */
+@media (hover: none) and (pointer: coarse) {
+  .header__home:active::before,
+  .header__menu-burger:active::before,
+  .header__item:active::before {
     opacity: 1;
     background: linear-gradient(to bottom, var(--hl1-hover), var(--hl2-hover));
     border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
+}
 
-  body.kbd-nav & button:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.18);
-    outline-offset: 2px;
-  }
-
-  @media (hover: hover) {
-    &__person-menu-button:is(:hover, :focus-visible) {
-      background: linear-gradient(
-        135deg,
-        rgba(0, 200, 255, 0.15),
-        rgba(0, 120, 255, 0.25)
-      );
-      box-shadow: 0 2px 10px rgba(0, 180, 255, 0.35);
-      color: #4dd2ff;
-      text-shadow: 0 0 6px rgba(0, 180, 255, 0.6);
-      // transform: scale(1.06);
-      outline: none;
-    }
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &__home:hover::before,
-    &__menu-burger:hover::before,
-    &__item:hover::before {
-      opacity: 1;
-      background: linear-gradient(
-        to bottom,
-        var(--hl1-hover),
-        var(--hl2-hover)
-      );
-      border-color: var(--hl-border-hover);
-    }
-
-    &__burger-button:hover {
-      span,
-      &::before,
-      &::after {
-        filter: drop-shadow(0 0 6px rgba(0, 234, 255, 0.5));
-      }
-    }
-  }
-
-  /* ===== Mobile tap-feedback (палец) ===== */
-  @media (hover: none) and (pointer: coarse) {
-    &__home:active::before,
-    &__menu-burger:active::before,
-    &__item:active::before {
-      opacity: 1;
-      background: linear-gradient(
-        to bottom,
-        var(--hl1-hover),
-        var(--hl2-hover)
-      );
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-  }
-
-  @media (max-width: 992px) {
-    &__person-menu-button {
-      height: 44px;
-    }
+@media (max-width: 992px) {
+  .header__person-menu-button {
+    height: 44px;
   }
 }
