@@ -31,28 +31,28 @@ const sidebar = document.querySelector(".sidebar");
 const randomGame = document.querySelector(".sidebar__random-game");
 const homeButton = document.querySelector(".header__home-button");
 
-const close = () => {
+const closeSidebar = () => {
   body.classList.remove("sidebar-open");
 };
 
-const toggle = () => {
+const toggleSidebar = () => {
   body.classList.toggle("sidebar-open");
 };
 
-burgerButton.addEventListener("click", toggle);
-overlay.addEventListener("click", close);
+burgerButton?.addEventListener("click", toggleSidebar);
+overlay?.addEventListener("click", closeSidebar);
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") close();
+  if (e.key === "Escape") closeSidebar();
 });
 
 randomGame?.addEventListener("click", () => {
-  close();
+  closeSidebar();
   body.classList.add("active-random");
   body.classList.remove("active-home");
 });
 
 homeButton?.addEventListener("click", () => {
-  close();
+  closeSidebar();
   body.classList.add("active-home");
   body.classList.remove("active-random");
 });
