@@ -471,6 +471,50 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  &-players {
+    @include a.clamp-size(width, 120, 220);
+    min-height: a.rem(180);
+    max-height: a.rem(300);
+    @include a.glassy;
+    display: flex;
+    justify-self: center;
+
+    min-width: 0;
+  }
+
+  &-players-avatar {
+    @include a.clamp-size(width, 70, 90);
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+
+    border: var(--c-cyan) solid 2px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 240, 255, 0.08);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &-players-name {
+    @include a.clamp-font(14, 20);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    text-align: center;
+    display: block;
+    width: 100%;
+
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .random-players {
