@@ -1,1 +1,38 @@
 @use "../abstracts" as a;
+
+.account {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: top right;
+  z-index: 106;
+
+  width: min(a.rem(420), calc(100vw - a.rem(32)));
+  max-height: 80vh;
+  overflow: auto;
+
+  border-radius: a.rem(18);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @include a.glassy;
+
+  box-shadow: 0 a.rem(18) a.rem(50) rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  transition:
+    opacity 0.14s ease,
+    transform 0.14s ease,
+    visibility 0.14s ease;
+}
+
+body.account-active .account {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
