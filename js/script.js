@@ -59,20 +59,44 @@ const toggleRegister = () => {
   body.classList.toggle("register-active");
 };
 
-burgerButton?.addEventListener("click", toggleSidebar);
-overlay?.addEventListener("click", closeSidebar);
+burgerButton?.addEventListener("click", () => {
+  closeRegister();
+  closePersonMenu();
+  toggleSidebar();
+});
+
+overlay?.addEventListener("click", () => {
+  closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
+  if (!keyboardMode && document.activeElement?.blur) {
+    document.activeElement.blur();
+  }
+});
+
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeSidebar();
+  if (e.key === "Escape") {
+    closeSidebar();
+    closeRegister();
+    closePersonMenu();
+  }
 });
 
 randomGame?.addEventListener("click", () => {
   closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
   body.classList.add("active-random");
   body.classList.remove("active-home");
 });
 
 homeButton?.addEventListener("click", () => {
   closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
   body.classList.add("active-home");
   body.classList.remove("active-random");
 });
