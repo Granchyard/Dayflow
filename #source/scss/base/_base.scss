@@ -86,7 +86,8 @@ body::-webkit-scrollbar-thumb:hover {
   background-repeat: no-repeat;
 }
 
-body.sidebar-open {
+body.sidebar-open,
+body.register-active {
   overflow: hidden;
   position: fixed;
   width: 100%;
