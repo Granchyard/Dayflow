@@ -1,13 +1,17 @@
 "use strict";
 
-
-//sidebar
+// ===== DOM =====
 
 const body = document.body;
+
+// layout
+
 const overlay = document.querySelector(".overlay");
 const header = document.querySelector(".header");
 const burgerButton = document.querySelector(".header__burger-button");
-const sidebar = document.querySelector(".sidebar");
+
+//sidebar
+
 const randomGame = document.querySelector(".sidebar__random-game");
 
 // account
@@ -19,6 +23,8 @@ const avatarBox = document.querySelector(".account__avatar-list-container");
 const accountAvatarImgBlock = document.querySelector(
   ".account__avatar-img-block",
 );
+
+// home
 
 const homeButton = document.querySelector(".header__home-button");
 
@@ -44,14 +50,58 @@ const registerConfirmPasswordInput = document.querySelector(
 );
 const logoutBtn = document.querySelector(".person-menu-button-logout");
 
+// random
+
+const randomPlayer1 = document.querySelector(".random__player1");
+const randomPlayer2 = document.querySelector(".random__player2");
+
+const randomPlayer1Count = randomPlayer1?.querySelector(
+  ".random__player1-count",
+);
+const randomPlayer2Count = randomPlayer2?.querySelector(
+  ".random__player2-count",
+);
+
+const randomWinner = document.querySelector(".random__winner");
+const randomWinnerName = document.querySelector(".random__winner-name");
+const randomButtonStart = document.querySelector(".random__button-start");
+const randomButtonPlay = document.querySelector(".random__button-play");
+
+const historyList = document.querySelector(".random__history-rows");
+const streakEl = document.querySelector(".random__streak-container");
+const historyEl = document.querySelector(".random__history-container");
+const randomStreakBestBlock = document.querySelector(".random__streak-best");
+const randomStreakCount = document.querySelector(".random__streak-count");
+const randomStreakBestValue = document.querySelector(
+  ".random__streak-best-value",
+);
+
+const randomPlayerOne = document.querySelector(".random__player1-name");
+const randomPlayerTwo = document.querySelector(".random__player2-name");
+
+// ===== STATE / CONSTS =====
+
 let keyboardMode = false;
 let selectedAvatarId = null;
-let userWinStreak = 0;
-let selectedPlayer = 1;
+
 let storageWarned = false;
+let userWinStreak = 0;
+
+let selectedPlayer = 1;
+
+let playDeadlineId = null;
+let queueDelayId = null; // 100ms таймер перед активацией
+let queueActiveId = null; // 15000ms таймер на снятие класса
+
+let lastQueuePlayer = null; // кого запустил последний showQueue: 1 или 2
+let forceQueuePlayer = null;
+
+let cubeResultPlayerOne = null;
+let cubeResultPlayerTwo = null;
+
+let playLocked = false;
 
 const AUTH_KEY = "authUser";
-
 const BOT_NAME = "__BOT__";
 const BOT_AVATAR_KEY = "botAvatarId";
 const USER_AVATAR_KEY = "guestUserAvatarId";
@@ -61,7 +111,6 @@ const BOT_AVATARS = [
   "../img/black theme avatar/Robot avatar 3/BlackThRbAvatar 2.webp",
   "../img/black theme avatar/Robot avatar 3/BlackThRbAvatar 3.webp",
 ];
-
 const USER_AVATARS = [
   "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 1.webp",
   "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 2.webp",
@@ -70,6 +119,8 @@ const USER_AVATARS = [
   "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 5.webp",
   "../img/black theme avatar/Player avatar 8-12/BlackThPlAvatar 6.webp",
 ];
+
+// ===== UI / PANELS FUNCTIONS =====
 
 const closeSidebar = () => {
   body.classList.remove("sidebar-open");
@@ -110,21 +161,22 @@ function closeAccount() {
 
 function closeChangeAvatar() {
   body.classList.remove("change-avatar");
+
   removeSelectedAvatarClass();
+
   setButtonsDefaultMode();
 }
 
 function handleAccountBackOrClose() {
   if (body.classList.contains("change-avatar")) {
     closeChangeAvatar();
-    return true;
+    // body.classList.remove("change-avatar");
+    return true; // обработали
   }
-
   if (body.classList.contains("account-active")) {
     closeAccount();
     return true;
   }
-
   return false;
 }
 
@@ -139,309 +191,90 @@ function removeSelectedAvatarClass() {
   selectedAvatarId = null;
 }
 
-burgerButton?.addEventListener("click", () => {
-  closeRegister();
-  closePersonMenu();
-  closeAccount();
-  toggleSidebar();
-});
+// ===== AUTH + STORAGE =====
 
-overlay?.addEventListener("click", () => {
-  if (handleAccountBackOrClose()) return;
-
-  closeSidebar();
-  closeRegister();
-  closePersonMenu();
-
-  if (!keyboardMode && document.activeElement?.blur) {
-    document.activeElement.blur();
+function isLocalStorageAvailable() {
+  try {
+    const testKey = "__test_localstorage__";
+    localStorage.setItem(testKey, "1");
+    localStorage.removeItem(testKey);
+    return true; // всё ок, можно использовать
+  } catch (e) {
+    return false; // нельзя – лучше не трогать
   }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    if (handleAccountBackOrClose()) return;
-
-    closeSidebar();
-    closeRegister();
-    closePersonMenu();
-  }
-});
-
-randomGame?.addEventListener("click", () => {
-  closeSidebar();
-  closePersonMenu();
-  closeAccount();
-
-  if (!body.classList.contains("active-random")) {
-    body.classList.add("active-random");
-    body.classList.remove("active-home");
-  }
-});
-
-homeButton?.addEventListener("click", () => {
-  closeSidebar();
-  closeRegister();
-  closePersonMenu();
-  closeAccount();
-
-  if (!body.classList.contains("active-home")) {
-    body.classList.add("active-home");
-    body.classList.remove("active-random");
-  }
-});
-
-headerPerson?.addEventListener("click", () => {
-  closeSidebar();
-  closeAccount();
-
-  if (getAuth()) {
-    closeSidebar();
-    body.classList.toggle("person-menu-open");
-  } else {
-    toggleRegister();
-    formBox.classList.remove("active-form");
-    formsValidation.clearForm(registerFormEnter);
-    formsValidation.clearForm(registerFormRegister);
-  }
-});
-
-accountMenu?.addEventListener("click", () => {
-  closeSidebar();
-  closeRegister();
-  closePersonMenu();
-
-  applyAccountAvatar();
-  setButtonsDefaultMode();
-
-  if (!body.classList.contains("account-active")) {
-    body.classList.add("account-active");
-  }
-});
-
-accountCancelButton?.addEventListener("click", () => {
-  handleAccountBackOrClose();
-});
-
-if (avatarBox) {
-  avatarBox.addEventListener("click", (e) => {
-    const item = e.target.closest(".account__avatar-item");
-    if (!item) return;
-
-    const items = [...avatarBox.querySelectorAll(".account__avatar-item")];
-    const id = items.indexOf(item);
-
-    const already = item.classList.contains("is-selected");
-
-    items.forEach((el) => el.classList.remove("is-selected"));
-
-    if (already) {
-      selectedAvatarId = null;
-      return;
-    }
-
-    item.classList.add("is-selected");
-    selectedAvatarId = id;
-  });
 }
 
-accountAvatarImgBlock?.addEventListener("click", () => {
-  body.classList.add("change-avatar");
-  setButtonsAvatarMode();
-});
+function getUsersArray() {
+  return JSON.parse(localStorage.getItem("users") || "[]");
+}
 
-accountSaveButton?.addEventListener("click", () => {
-  if (!body.classList.contains("change-avatar")) {
-    closeAccount();
-    return;
-  }
+function saveUsersArray(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-  if (selectedAvatarId == null) return;
+function setAuth(username, remember) {
+  sessionStorage.removeItem(AUTH_KEY);
+  localStorage.removeItem(AUTH_KEY);
 
-  saveSelectedAvatarId(selectedAvatarId);
-  applyAccountAvatar();
-  applyAvatars();
-  closeChangeAvatar();
-});
+  const payload = { username };
+  const storage = remember ? localStorage : sessionStorage; // галочка = localStorage
+  storage.setItem(AUTH_KEY, JSON.stringify(payload));
+  loadStats();
+}
 
-signUpButton?.addEventListener("click", () => {
-  formBox.classList.add("active-form");
-  formsValidation.clearForm(registerFormEnter);
-});
-
-signInButton?.addEventListener("click", () => {
-  formBox.classList.remove("active-form");
-  formsValidation.clearForm(registerFormRegister);
-});
-
-passwordWrapper.forEach((block) => {
-  const input = block.querySelector(".form-password");
-  const eyeIcon = block.querySelector(".register__password-eye");
-
-  if (!input || !eyeIcon) return;
-  eyeIcon.addEventListener("click", () => {
-    const isPassword = input.type === "password";
-
-    input.type = isPassword ? "text" : "password";
-    eyeIcon.src = isPassword
-      ? "/img/passVisibility/passEye.svg"
-      : "/img/passVisibility/passEyeClose.svg";
-  });
-});
-
-registerFormEnter?.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  enterUsernameInput.setCustomValidity("");
-  enterPasswordInput.setCustomValidity("");
-
-  const requiredInputs = [...registerFormEnter.elements].filter(
-    (e) => e.required,
+function getAuth() {
+  return JSON.parse(
+    sessionStorage.getItem(AUTH_KEY) ||
+      localStorage.getItem(AUTH_KEY) ||
+      "null",
   );
+}
 
-  let firstInvalidInput = null;
+function clearAuth() {
+  sessionStorage.removeItem(AUTH_KEY);
+  localStorage.removeItem(AUTH_KEY);
+}
 
-  requiredInputs.forEach((input) => {
-    const isValid = formsValidation.validateInput(input);
-    if (!isValid && !firstInvalidInput) {
-      firstInvalidInput = input;
-    }
-  });
+function applyAuthUI() {
+  const auth = getAuth();
+  document.body.classList.toggle("logged-in", !!auth);
 
-  if (!registerFormEnter.checkValidity()) {
-    if (firstInvalidInput) firstInvalidInput.focus();
-    return;
-  }
+  const el = document.querySelector(".header__person-menu-button-account-name");
+  // if (el) el.textContent = auth?.username ?? "Account";
 
-  const username = enterUsernameInput.value.trim();
-  const password = enterPasswordInput.value.trim();
+  if (!el) return;
+  el.textContent = auth?.username ? auth.username : "Account";
+}
+
+function registerLocalStorage() {
+  const usernameRegister = registerUsernameInput.value.trim();
+  const passwordRegister = registerPasswordInput.value.trim();
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
-  const user = users.find((u) => u.username === username);
 
-  if (!user) {
-    enterUsernameInput.setCustomValidity("User not found");
-    formsValidation.validateInput(enterUsernameInput);
-    enterUsernameInput.focus();
-    return;
-  }
+  users.push({
+    username: usernameRegister,
+    password: passwordRegister,
+    // avatarId: getGuestUserAvatarId(),
+    avatarId: Math.floor(Math.random() * USER_AVATARS.length),
+  });
 
-  if (user.password !== password) {
-    enterPasswordInput.setCustomValidity("Wrong password");
-    formsValidation.validateInput(enterPasswordInput);
-    enterPasswordInput.focus();
-    return;
-  }
+  localStorage.setItem("users", JSON.stringify(users));
 
-  setAuth(username, rememberMeCheckbox.checked);
-ensureUserAvatarSaved(username);
-
-applyAuthUI();
-bestStreakVisibility();
-setStreakBestValue(getBestStreak());
-streakAndHistoryUnavailable();
-
-assignSeats();
-
-applyAccountAvatar();
-updateStreakUI();
-renderHistoryFromStorage();
-
-closeRegister();
-formsValidation.clearForm(registerFormEnter);
-});
-
-logoutBtn?.addEventListener("click", () => {
-  clearAuth();
-
+  setAuth(usernameRegister, rememberMeCheckbox.checked);
   applyAuthUI();
   bestStreakVisibility();
   setStreakBestValue(getBestStreak());
   streakAndHistoryUnavailable();
+
   assignSeats();
+
+  applyAccountAvatar();
   updateStreakUI();
-  closePersonMenu();
-});
-
-registerFormRegister?.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  registerUsernameInput.setCustomValidity("");
-
-  const usernameRegister = registerUsernameInput.value.trim();
-
-  const users = JSON.parse(localStorage.getItem("users") || "[]");
-  const isUserExist = users.some((user) => user.username === usernameRegister);
-
-  if (isUserExist) {
-    registerUsernameInput.setCustomValidity("This username is already taken");
-  }
-
-  const requiredInputs = [...registerFormRegister.elements].filter(
-    (el) => el.required,
-  );
-
-  let firstInvalidInput = null;
-
-  requiredInputs.forEach((input) => {
-    const isValid = formsValidation.validateInput(input);
-    if (!isValid && !firstInvalidInput) {
-      firstInvalidInput = input;
-    }
-  });
-
-  const isFormValid = registerFormRegister.checkValidity();
-
-  if (!isFormValid) {
-    if (firstInvalidInput) {
-      firstInvalidInput.focus();
-    }
-    return;
-  }
-
-  if (!isLocalStorageAvailable()) {
-    if (!storageWarned) {
-      alert("LocalStorage is not available in this browser mode.");
-      storageWarned = true;
-    }
-    return;
-  }
-
-  registerLocalStorage();
-});
-
-const randomPlayer1 = document.querySelector(".random__player1");
-const randomPlayer2 = document.querySelector(".random__player2");
-
-const randomPlayer1Count = randomPlayer1?.querySelector(
-  ".random__player1-count"
-);
-const randomPlayer2Count = randomPlayer2?.querySelector(
-  ".random__player2-count"
-);
-
-
-
-const randomWinner = document.querySelector(".random__winner");
-const randomWinnerName = document.querySelector(".random__winner-name");
-
-
-
-const randomButtonStart = document.querySelector(".random__button-start");
-const randomButtonPlay = document.querySelector(".random__button-play");
-
-const historyList = document.querySelector(".random__history-rows");
-const streakEl = document.querySelector(".random__streak-container");
-const historyEl = document.querySelector(".random__history-container");
-const randomStreakBestBlock = document.querySelector(".random__streak-best");
-const randomStreakCount = document.querySelector(".random__streak-count");
-const randomStreakBestValue = document.querySelector(
-  ".random__streak-best-value",
-);
-
-const randomPlayerOne = document.querySelector(".random__player1-name");
-const randomPlayerTwo = document.querySelector(".random__player2-name");
-
+  renderHistoryFromStorage();
+  closeRegister();
+  formsValidation.clearForm(registerFormRegister);
+}
 
 // ===== FORMS VALIDATION CLASS =====
 
@@ -948,90 +781,7 @@ function assignSeats() {
   applyAvatars();
 }
 
-// ===== AUTH + STORAGE =====
-
-function isLocalStorageAvailable() {
-  try {
-    const testKey = "__test_localstorage__";
-    localStorage.setItem(testKey, "1");
-    localStorage.removeItem(testKey);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-function getUsersArray() {
-  return JSON.parse(localStorage.getItem("users") || "[]");
-}
-
-function saveUsersArray(users) {
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
-function setAuth(username, remember) {
-  sessionStorage.removeItem(AUTH_KEY);
-  localStorage.removeItem(AUTH_KEY);
-
-  const payload = { username };
-  const storage = remember ? localStorage : sessionStorage;
-  storage.setItem(AUTH_KEY, JSON.stringify(payload));
-  loadStats();
-}
-
-function getAuth() {
-  return JSON.parse(
-    sessionStorage.getItem(AUTH_KEY) ||
-      localStorage.getItem(AUTH_KEY) ||
-      "null",
-  );
-}
-
-function clearAuth() {
-  sessionStorage.removeItem(AUTH_KEY);
-  localStorage.removeItem(AUTH_KEY);
-}
-
-function applyAuthUI() {
-  const auth = getAuth();
-  document.body.classList.toggle("logged-in", !!auth);
-
-  const el = document.querySelector(".header__person-menu-button-account-name");
-  if (!el) return;
-
-  el.textContent = auth?.username ? auth.username : "Account";
-}
-
-function registerLocalStorage() {
-  const usernameRegister = registerUsernameInput.value.trim();
-  const passwordRegister = registerPasswordInput.value.trim();
-
-  const users = JSON.parse(localStorage.getItem("users") || "[]");
-
-  users.push({
-    username: usernameRegister,
-    password: passwordRegister,
-    avatarId: Math.floor(Math.random() * USER_AVATARS.length),
-  });
-
-  localStorage.setItem("users", JSON.stringify(users));
-
-  setAuth(usernameRegister, rememberMeCheckbox.checked);
-  applyAuthUI();
-  bestStreakVisibility();
-  setStreakBestValue(getBestStreak());
-  streakAndHistoryUnavailable();
-
-  assignSeats();
-
-  applyAccountAvatar();
-  updateStreakUI();
-  renderHistoryFromStorage();
-  closeRegister();
-  formsValidation.clearForm(registerFormRegister);
-}
-
-let playDeadlineId = null;
+// ===== GAME FLOW =====
 
 function startPlayDeadline(ms = 15000) {
   cancelPlayDeadline();
@@ -1045,6 +795,20 @@ function cancelPlayDeadline() {
     clearTimeout(playDeadlineId);
     playDeadlineId = null;
   }
+}
+
+function cancel() {
+  if (queueDelayId) {
+    clearTimeout(queueDelayId);
+    queueDelayId = null;
+  }
+  if (queueActiveId) {
+    clearTimeout(queueActiveId);
+    queueActiveId = null;
+  }
+
+  randomPlayer1?.classList.remove("queue-active");
+  randomPlayer2?.classList.remove("queue-active");
 }
 
 function restartGame(reason = "") {
@@ -1069,26 +833,6 @@ function restartGame(reason = "") {
   attachPlayHandler();
 }
 
-let queueDelayId = null;
-let queueActiveId = null;
-
-function cancel() {
-  if (queueDelayId) {
-    clearTimeout(queueDelayId);
-    queueDelayId = null;
-  }
-  if (queueActiveId) {
-    clearTimeout(queueActiveId);
-    queueActiveId = null;
-  }
-
-  randomPlayer1?.classList.remove("queue-active");
-  randomPlayer2?.classList.remove("queue-active");
-}
-
-let lastQueuePlayer = null;
-let forceQueuePlayer = null;
-
 function showPlay() {
   if (!randomButtonPlay) return;
   randomButtonPlay.classList.remove("btn-gone");
@@ -1097,7 +841,6 @@ function showPlay() {
 }
 
 function showQueue(once = false) {
-
   if (!randomPlayer1 || !randomPlayer2) return;
   if (!randomButtonPlay) return;
 
@@ -1145,11 +888,6 @@ function showQueue(once = false) {
   }
 }
 
-let cubeResultPlayerOne = null;
-let cubeResultPlayerTwo = null;
-
-//cube
-
 function playCubeAnimation() {
   return new Promise((resolve) => {
     const cubeContainer = document.querySelector(".random__cube-container");
@@ -1190,119 +928,101 @@ function playCubeAnimation() {
       resolve({ cubeEnd: true });
 
       if (lastQueuePlayer === 1) {
-        if (randomPlayer1Count) randomPlayer1Count.textContent = String(cubeNumber);
+        if (randomPlayer1Count)
+          randomPlayer1Count.textContent = String(cubeNumber);
         cubeResultPlayerOne = cubeNumber;
       } else if (lastQueuePlayer === 2) {
-        if (randomPlayer2Count) randomPlayer2Count.textContent = String(cubeNumber);
+        if (randomPlayer2Count)
+          randomPlayer2Count.textContent = String(cubeNumber);
         cubeResultPlayerTwo = cubeNumber;
       }
 
       if (cubeResultPlayerOne !== null && cubeResultPlayerTwo !== null) {
-  const leftName = String(
-    randomPlayerOne.dataset.pid || randomPlayerOne.textContent,
-  ).trim();
-  const rightName = String(
-    randomPlayerTwo.dataset.pid || randomPlayerTwo.textContent,
-  ).trim();
+        const leftName = String(
+          randomPlayerOne.dataset.pid || randomPlayerOne.textContent,
+        ).trim();
+        const rightName = String(
+          randomPlayerTwo.dataset.pid || randomPlayerTwo.textContent,
+        ).trim();
 
-  const dateText = getHistoryDate();
+        const dateText = getHistoryDate();
 
-  if (cubeResultPlayerOne > cubeResultPlayerTwo) {
-    updateUserStreakAfterRound(1);
+        if (cubeResultPlayerOne > cubeResultPlayerTwo) {
+          updateUserStreakAfterRound(1);
 
-    randomWinner.classList.add("show-winner");
+          randomWinner.classList.add("show-winner");
 
-    const winnerName = leftName;
+          const winnerName = leftName;
 
-    pushHistoryToStorage({
-      ts: Date.now(),
-      date: dateText,
-      p1: leftName,
-      p2: rightName,
-      winner: winnerName,
-    });
+          pushHistoryToStorage({
+            ts: Date.now(),
+            date: dateText,
+            p1: leftName,
+            p2: rightName,
+            winner: winnerName,
+          });
 
-    renderHistoryFromStorage();
-    randomWinnerName.textContent = labelForWinner(winnerName);
+          renderHistoryFromStorage();
+          randomWinnerName.textContent = labelForWinner(winnerName);
 
-    setTimeout(() => {
-      randomWinner.classList.remove("show-winner");
-    }, 10000);
-  } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
-    updateUserStreakAfterRound(2);
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+        } else if (cubeResultPlayerOne < cubeResultPlayerTwo) {
+          updateUserStreakAfterRound(2);
 
-    randomWinner.classList.add("show-winner");
+          randomWinner.classList.add("show-winner");
 
-    const winnerName = rightName;
+          const winnerName = rightName;
 
-    pushHistoryToStorage({
-      ts: Date.now(),
-      date: dateText,
-      p1: leftName,
-      p2: rightName,
-      winner: winnerName,
-    });
+          pushHistoryToStorage({
+            ts: Date.now(),
+            date: dateText,
+            p1: leftName,
+            p2: rightName,
+            winner: winnerName,
+          });
 
-    renderHistoryFromStorage();
-    randomWinnerName.textContent = labelForWinner(winnerName);
+          renderHistoryFromStorage();
+          randomWinnerName.textContent = labelForWinner(winnerName);
 
-    setTimeout(() => {
-      randomWinner.classList.remove("show-winner");
-    }, 10000);
-  } else {
-    updateUserStreakAfterRound(null);
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+        } else {
+          updateUserStreakAfterRound(null);
 
-    randomWinner.classList.add("show-winner");
+          randomWinner.classList.add("show-winner");
 
-    const winnerName = "Friendship";
+          const winnerName = "Friendship";
 
-    pushHistoryToStorage({
-      ts: Date.now(),
-      date: dateText,
-      p1: leftName,
-      p2: rightName,
-      winner: winnerName,
-    });
+          pushHistoryToStorage({
+            ts: Date.now(),
+            date: dateText,
+            p1: leftName,
+            p2: rightName,
+            winner: winnerName,
+          });
 
-    renderHistoryFromStorage();
-    randomWinnerName.textContent = "Friendship";
+          renderHistoryFromStorage();
+          randomWinnerName.textContent = "Friendship";
 
-    setTimeout(() => {
-      randomWinner.classList.remove("show-winner");
-    }, 10000);
-  }
-}
+          setTimeout(() => {
+            randomWinner.classList.remove("show-winner");
+          }, 10000);
+        }
+      }
 
       randomWinner.addEventListener(
         "transitionend",
         () => {
           restartGame("winner-finished");
         },
-        { once: true }
+        { once: true },
       );
     }, 2000);
   });
 }
-
-attachPlayHandler();
-randomButtonStart?.addEventListener("click", () => {
-  if (randomWinner.classList.contains("show-winner")) {
-    randomWinner.classList.remove("show-winner");
-  }
-
-  const onEnd = (e) => {
-    if (e.target !== randomButtonStart || e.propertyName !== "opacity") return;
-    randomButtonStart.classList.add("btn-gone");
-    assignSeats();
-    showPlay();
-    showQueue();
-  };
-
-  randomButtonStart.addEventListener("transitionend", onEnd, { once: true });
-  randomButtonStart.classList.add("btn-hidden");
-});
-
-let playLocked = false;
 
 async function onPlayClick() {
   if (playLocked) return;
@@ -1321,24 +1041,6 @@ async function onPlayClick() {
 
   showQueue(true);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  body.classList.add("active-home");
-  body.classList.remove("active-random");
-
-  applyAuthUI();
-
-  bestStreakVisibility();
-  streakAndHistoryUnavailable();
-  loadStats();
-  renderHistoryFromStorage();
-  getGuestUserAvatarId();
-  assignSeats();
-  updateStreakUI();
-  updateHistoryHeaderPadding();
-});
-
-window.addEventListener("resize", updateHistoryHeaderPadding);
 
 function attachPlayHandler() {
   if (!randomButtonPlay) return;
@@ -1416,9 +1118,6 @@ function initHeaderFocusFix() {
 
 // disable zooming
 
-initKbdNav();
-initHeaderFocusFix();
-
 document.addEventListener(
   "touchmove",
   function (e) {
@@ -1442,3 +1141,348 @@ document.addEventListener(
   },
   { passive: false },
 );
+
+// accessibility / focus init
+
+initKbdNav();
+initHeaderFocusFix();
+
+// sidebar
+
+randomGame?.addEventListener("click", () => {
+  closeSidebar();
+  closePersonMenu();
+  closeAccount();
+
+  if (!body.classList.contains("active-random")) {
+    body.classList.add("active-random");
+    body.classList.remove("active-home");
+  }
+});
+
+burgerButton?.addEventListener("click", () => {
+  closeRegister();
+  closePersonMenu();
+  closeAccount();
+  toggleSidebar();
+});
+
+overlay?.addEventListener("click", () => {
+  if (handleAccountBackOrClose()) return;
+
+  closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
+  if (!keyboardMode && document.activeElement?.blur) {
+    document.activeElement.blur();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (handleAccountBackOrClose()) return;
+
+    closeSidebar();
+    closeRegister();
+    closePersonMenu();
+  }
+});
+
+// account
+
+accountMenu?.addEventListener("click", () => {
+  closeSidebar();
+  closeRegister();
+  closePersonMenu();
+
+  applyAccountAvatar();
+
+  setButtonsDefaultMode();
+
+  if (!body.classList.contains("account-active")) {
+    body.classList.add("account-active");
+  }
+});
+
+accountCancelButton?.addEventListener("click", () => {
+  handleAccountBackOrClose();
+});
+
+if (avatarBox) {
+  avatarBox.addEventListener("click", (e) => {
+    const item = e.target.closest(".account__avatar-item");
+    if (!item) return;
+
+    const items = [...avatarBox.querySelectorAll(".account__avatar-item")];
+    const id = items.indexOf(item); // 0..5
+
+    const already = item.classList.contains("is-selected");
+
+    items.forEach((el) => el.classList.remove("is-selected"));
+
+    if (already) {
+      selectedAvatarId = null; // повторный клик -> снять выбор
+      return;
+    }
+
+    item.classList.add("is-selected");
+    selectedAvatarId = id; // ✅ сохранили выбранный id
+  });
+}
+
+accountAvatarImgBlock?.addEventListener("click", () => {
+  body.classList.add("change-avatar");
+  setButtonsAvatarMode();
+});
+
+accountSaveButton?.addEventListener("click", () => {
+  // обычный режим аккаунта -> Save закрывает
+  if (!body.classList.contains("change-avatar")) {
+    closeAccount();
+    return;
+  }
+
+  // режим выбора авы -> Choose сохраняет
+  if (selectedAvatarId == null) return;
+
+  saveSelectedAvatarId(selectedAvatarId);
+  applyAccountAvatar();
+  applyAvatars();
+  closeChangeAvatar();
+});
+
+// home
+
+homeButton?.addEventListener("click", () => {
+  closeSidebar();
+  closeRegister();
+  closePersonMenu();
+  closeAccount();
+  if (!body.classList.contains("active-home")) {
+    body.classList.add("active-home");
+    body.classList.remove("active-random");
+  }
+});
+
+// DOM ready + resize
+
+document.addEventListener("DOMContentLoaded", () => {
+  body.classList.add("active-home");
+  body.classList.remove("active-random");
+
+  applyAuthUI();
+
+  bestStreakVisibility();
+  streakAndHistoryUnavailable();
+  loadStats();
+  renderHistoryFromStorage();
+  getGuestUserAvatarId();
+  assignSeats();
+  updateStreakUI();
+  updateHistoryHeaderPadding();
+});
+
+window.addEventListener("resize", updateHistoryHeaderPadding);
+
+// register menu
+
+headerPerson?.addEventListener("click", () => {
+  closeSidebar();
+  closeAccount();
+
+  if (getAuth()) {
+    closeSidebar();
+    body.classList.toggle("person-menu-open");
+  } else {
+    toggleRegister();
+    formBox.classList.remove("active-form");
+    formsValidation.clearForm(registerFormEnter);
+    formsValidation.clearForm(registerFormRegister);
+  }
+});
+
+signUpButton?.addEventListener("click", () => {
+  formBox.classList.add("active-form");
+  formsValidation.clearForm(registerFormEnter);
+});
+
+signInButton?.addEventListener("click", () => {
+  formBox.classList.remove("active-form");
+  formsValidation.clearForm(registerFormRegister);
+});
+
+passwordWrapper.forEach((block) => {
+  const input = block.querySelector(".form-password");
+  const eyeIcon = block.querySelector(".register__password-eye");
+
+  if (!input || !eyeIcon) return;
+  eyeIcon.addEventListener("click", () => {
+    const isPassword = input.type === "password";
+
+    input.type = isPassword ? "text" : "password";
+    eyeIcon.src = isPassword
+      ? "/img/passVisibility/passEye.svg"
+      : "/img/passVisibility/passEyeClose.svg";
+  });
+});
+
+// login submit
+
+registerFormEnter?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // 0) Сброс кастомной ошибки (чтобы не висела со старой попытки)
+  enterUsernameInput.setCustomValidity("");
+  enterPasswordInput.setCustomValidity("");
+
+  // 1) Проверка required-полей (как в регистрации)
+  const requiredInputs = [...registerFormEnter.elements].filter(
+    (e) => e.required,
+  );
+
+  let firstInvalidInput = null;
+
+  requiredInputs.forEach((input) => {
+    const isValid = formsValidation.validateInput(input);
+    if (!isValid && !firstInvalidInput) {
+      firstInvalidInput = input;
+    }
+  });
+
+  if (!registerFormEnter.checkValidity()) {
+    if (firstInvalidInput) firstInvalidInput.focus();
+    return;
+  }
+
+  //  2) логика входа
+  const username = enterUsernameInput.value.trim();
+  const password = enterPasswordInput.value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const user = users.find((u) => u.username === username);
+
+  if (!user) {
+    enterUsernameInput.setCustomValidity("User not found");
+    formsValidation.validateInput(enterUsernameInput);
+    enterUsernameInput.focus();
+    return;
+  }
+
+  if (user.password !== password) {
+    enterPasswordInput.setCustomValidity("Wrong password");
+    formsValidation.validateInput(enterPasswordInput);
+    enterPasswordInput.focus();
+    return;
+  }
+
+  // 3) сохранить "сессию"
+  setAuth(username, rememberMeCheckbox.checked);
+  ensureUserAvatarSaved(username);
+
+  applyAuthUI();
+  bestStreakVisibility();
+  setStreakBestValue(getBestStreak());
+  streakAndHistoryUnavailable();
+
+  assignSeats();
+
+  applyAccountAvatar();
+  updateStreakUI();
+  renderHistoryFromStorage();
+
+  // 4) закрыть окно и очистить форму
+  closeRegister();
+  formsValidation.clearForm(registerFormEnter);
+
+  // тут обычно обновляют UI: показать аватар/имя, скрыть кнопку входа и т.д.
+});
+
+// logout
+
+logoutBtn?.addEventListener("click", () => {
+  clearAuth();
+
+  applyAuthUI();
+  bestStreakVisibility();
+  setStreakBestValue(getBestStreak());
+  streakAndHistoryUnavailable();
+  assignSeats();
+  updateStreakUI();
+  closePersonMenu();
+});
+
+// register submit
+
+registerFormRegister?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  registerUsernameInput.setCustomValidity("");
+
+  const usernameRegister = registerUsernameInput.value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  const isUserExist = users.some((user) => user.username === usernameRegister);
+
+  if (isUserExist) {
+    registerUsernameInput.setCustomValidity("This username is already taken");
+  }
+
+  // 1) Проверяем форму через валидатор
+
+  const requiredInputs = [...registerFormRegister.elements].filter(
+    (el) => el.required,
+  );
+
+  let firstInvalidInput = null;
+
+  requiredInputs.forEach((input) => {
+    const isValid = formsValidation.validateInput(input);
+    if (!isValid && !firstInvalidInput) {
+      firstInvalidInput = input;
+    }
+  });
+
+  const isFormValid = registerFormRegister.checkValidity();
+
+  if (!isFormValid) {
+    if (firstInvalidInput) {
+      firstInvalidInput.focus(); // ← фокус обратно
+    }
+    return;
+  }
+
+  // 2) Проверяем доступность localStorage
+  if (!isLocalStorageAvailable()) {
+    alert("LocalStorage is not available in this browser mode.");
+    return;
+  }
+
+  // 3) Пишем в localStorage
+  registerLocalStorage();
+});
+
+// game buttons
+
+attachPlayHandler();
+
+randomButtonStart?.addEventListener("click", () => {
+  if (randomWinner.classList.contains("show-winner")) {
+    randomWinner.classList.remove("show-winner");
+  }
+
+  // Подписываемся ДО запуска перехода
+  const onEnd = (e) => {
+    if (e.target !== randomButtonStart || e.propertyName !== "opacity") return;
+    randomButtonStart.classList.add("btn-gone"); // теперь можно убрать из потока
+
+    assignSeats();
+
+    showPlay(); // и показать вторую кнопку
+    showQueue();
+  };
+
+  randomButtonStart.addEventListener("transitionend", onEnd, { once: true });
+  randomButtonStart.classList.add("btn-hidden"); // запускаем плавное исчезновение
+});
