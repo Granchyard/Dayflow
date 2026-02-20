@@ -1195,6 +1195,24 @@ body.register-active .register {
   width: 100%;
 }
 
+.register__error-box {
+  display: block;
+  width: 100%;
+  padding: 8px 0 0 0;
+  font-size: 13px;
+  color: rgb(255, 92, 92);
+  line-height: 16px;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+.error-input-color {
+  border: 1px solid #ff5c5c;
+  background-color: #522e2e;
+}
+
 .random {
   grid-row: 1/2;
   grid-column: 1/2;
