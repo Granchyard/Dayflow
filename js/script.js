@@ -5,10 +5,38 @@
 
 const body = document.body;
 const overlay = document.querySelector(".overlay");
+const header = document.querySelector(".header");
 const burgerButton = document.querySelector(".header__burger-button");
 const sidebar = document.querySelector(".sidebar");
 const randomGame = document.querySelector(".sidebar__random-game");
 const homeButton = document.querySelector(".header__home-button");
+
+// register
+
+const headerPerson = document.querySelector(".header__person");
+const signInButton = document.querySelector(".btn-enter");
+const signUpButton = document.querySelector(".btn-register");
+const formBox = document.querySelector(".register__form-box");
+const passwordWrapper = document.querySelectorAll(
+  ".register__pasword-block-passwort-wrapper",
+);
+const registerFormEnter = document.querySelector(".register__form-enter");
+const registerFormRegister = document.querySelector(".register__form-register");
+const rememberMeCheckbox = document.getElementById("rememberMe");
+
+const enterUsernameInput = document.querySelector(".enter-username");
+const enterPasswordInput = document.querySelector(".enter-password");
+const registerUsernameInput = document.querySelector(".register-username");
+const registerPasswordInput = document.querySelector(".register-password");
+const registerConfirmPasswordInput = document.querySelector(
+  ".register-confirm-password",
+);
+const logoutBtn = document.querySelector(".person-menu-button-logout");
+
+let keyboardMode = false;
+let storageWarned = false;
+
+const AUTH_KEY = "authUser";
 
 const closeSidebar = () => {
   body.classList.remove("sidebar-open");
@@ -16,6 +44,19 @@ const closeSidebar = () => {
 
 const toggleSidebar = () => {
   body.classList.toggle("sidebar-open");
+};
+
+const closePersonMenu = () => {
+  body.classList.remove("person-menu-open");
+};
+
+const closeRegister = () => {
+  body.classList.remove("register-active");
+  formBox?.classList.remove("active-form");
+};
+
+const toggleRegister = () => {
+  body.classList.toggle("register-active");
 };
 
 burgerButton?.addEventListener("click", toggleSidebar);
