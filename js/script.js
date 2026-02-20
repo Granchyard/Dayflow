@@ -18,7 +18,7 @@ const signInButton = document.querySelector(".btn-enter");
 const signUpButton = document.querySelector(".btn-register");
 const formBox = document.querySelector(".register__form-box");
 const passwordWrapper = document.querySelectorAll(
-  ".register__password-block-passwort-wrapper",
+  ".register__password-block-password-wrapper",
 );
 const registerFormEnter = document.querySelector(".register__form-enter");
 const registerFormRegister = document.querySelector(".register__form-register");
