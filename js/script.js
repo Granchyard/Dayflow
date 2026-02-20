@@ -142,10 +142,13 @@ function removeSelectedAvatarClass() {
 burgerButton?.addEventListener("click", () => {
   closeRegister();
   closePersonMenu();
+  closeAccount();
   toggleSidebar();
 });
 
 overlay?.addEventListener("click", () => {
+  if (handleAccountBackOrClose()) return;
+
   closeSidebar();
   closeRegister();
   closePersonMenu();
@@ -157,6 +160,8 @@ overlay?.addEventListener("click", () => {
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
+    if (handleAccountBackOrClose()) return;
+
     closeSidebar();
     closeRegister();
     closePersonMenu();
@@ -165,26 +170,33 @@ document.addEventListener("keydown", (e) => {
 
 randomGame?.addEventListener("click", () => {
   closeSidebar();
-  closeRegister();
   closePersonMenu();
+  closeAccount();
 
-  body.classList.add("active-random");
-  body.classList.remove("active-home");
+  if (!body.classList.contains("active-random")) {
+    body.classList.add("active-random");
+    body.classList.remove("active-home");
+  }
 });
 
 homeButton?.addEventListener("click", () => {
   closeSidebar();
   closeRegister();
   closePersonMenu();
+  closeAccount();
 
-  body.classList.add("active-home");
-  body.classList.remove("active-random");
+  if (!body.classList.contains("active-home")) {
+    body.classList.add("active-home");
+    body.classList.remove("active-random");
+  }
 });
 
 headerPerson?.addEventListener("click", () => {
   closeSidebar();
+  closeAccount();
 
   if (getAuth()) {
+    closeSidebar();
     body.classList.toggle("person-menu-open");
   } else {
     toggleRegister();
